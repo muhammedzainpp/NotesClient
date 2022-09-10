@@ -1,10 +1,7 @@
 ﻿using Notes.Web.Services.Interfaces;
-using System.Net.Http;
 using System.Text.Json;
 using System.Text;
 using System.Net.Http.Headers;
-using System;
-using System.Reflection.Metadata;
 
 namespace Notes.Web.Services;
 
