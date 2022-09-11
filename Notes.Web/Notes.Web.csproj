@@ -15,4 +15,8 @@
     <Folder Include="Views\Components\Base\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Views\Components\Header\Header.razor" />
+  </ItemGroup>
+
 </Project>
