@@ -4,6 +4,8 @@ using Notes.Web;
 using Notes.Web.Models.Configurations;
 using Notes.Web.Services;
 using Notes.Web.Services.Interfaces;
+using Notes.Web.ViewModel.AccountViewModels;
+using Notes.Web.ViewModel.AccountViewModels.Interfaces;
 using Notes.Web.ViewModel.NoteViewModels;
 using Notes.Web.ViewModel.NoteViewModels.Interfaces;
 
@@ -31,4 +33,6 @@ static void AddViewModels(WebAssemblyHostBuilder builder)
 {
     builder.Services.AddScoped<ISaveNoteVm, SaveNoteVm>();
     builder.Services.AddScoped<IListNoteVm, ListNoteVm>();
+    builder.Services.AddScoped<IRegisterVm, RegisterVm>();
+    builder.Services.AddScoped<ILoginVm, LoginVm>();
 }

@@ -1,0 +1,15 @@
+﻿<div class="mx-3 mt-5">
+    <EditForm Model="@Vm" OnValidSubmit="@Vm.LoginAsync">
+        <div class="mb-2">
+            <label for="email">Email:</label>
+            <InputText id="email" @bind-Value="Vm.Email" class="w-100" />
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <InputText type="password" id="password" @bind-Value="Vm.Password" class="w-100" />
+        </div>
+        <div class="d-flex flex-row-reverse">
+            <button class="btn btn-primary my-2" type="submit">Login</button>
+        </div>
+    </EditForm>
+</div>
