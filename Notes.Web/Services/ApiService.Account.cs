@@ -1,22 +1,29 @@
-﻿using Notes.Web.Dtos.Account.Login;
+﻿using Notes.Web.Dtos.Account.CurrentUser;
+using Notes.Web.Dtos.Account.Login;
 using Notes.Web.Dtos.Account.Register;
-using Notes.Web.Dtos.Notes.SaveNoteCommand;
 
 namespace Notes.Web.Services;
 
 public partial class ApiService
 {
-    public  async Task<RegistrationResponseDto> RegisterUserAsync(RegisterCommand request)
+    public  async Task RegisterUserAsync(RegisterCommand request)
     {
         var url = "Account/Registration";
-        var response = await PostAsync<RegisterCommand, RegistrationResponseDto>(request, url);
-        return response;
+        await PostAsync(request, url);
     }
 
-    public async Task<AuthResponseDto> LoginAsync(LoginCommand request)
+    public async Task<CurrentUserDto> CurrentUserInfo()
+    {
+        var result = await GetAsync<CurrentUserDto>("account/currentuserinfo");
+        return result!;
+    }
+
+    public async Task LoginAsync(LoginCommand request)
     {
         var url = "Account/Login";
-        var response = await PostAsync<LoginCommand, AuthResponseDto>(request, url);
-        return response;
+        await PostAsync(request, url);
     }
+
+    public async Task Logout() => 
+        await PostAsync<object>(null, "auth/logout");
 }

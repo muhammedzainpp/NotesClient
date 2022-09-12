@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Notes.Web;
@@ -16,6 +17,11 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 AddHttp(builder);
 
 builder.Services.AddScoped<IApiService, ApiService>();
+
+builder.Services.AddOptions();
+builder.Services.AddAuthorizationCore();
+builder.Services.AddScoped<CustomStateProvider>();
+builder.Services.AddScoped<AuthenticationStateProvider>(s => s.GetRequiredService<CustomStateProvider>());
 
 //inject view models
 AddViewModels(builder);

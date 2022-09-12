@@ -1,7 +1,18 @@
 ﻿@inherits LayoutComponentBase
-@using Notes.Web.Views.Components.Header
-@using Notes.Web.Views.Components.Sidebar
 
-<Header/>
-<Sidebar/>
-@Body
+<AuthorizeView>
+    <NotAuthorized>
+        <Login />
+    </NotAuthorized>
+    <Authorized>
+        <h1>Hello @context?.User?.Identity?.Name !!</h1>
+        <Header />
+        <Sidebar />
+        <main id="main" class="main">
+            @Body
+        </main>
+    </Authorized>
+    <Authorizing>
+        <h1>Loading ...</h1>
+    </Authorizing>
+</AuthorizeView>

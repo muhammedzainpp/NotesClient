@@ -1,10 +1,13 @@
-﻿using Notes.Web.Dtos.Account.Login;
+﻿using Notes.Web.Dtos.Account.CurrentUser;
+using Notes.Web.Dtos.Account.Login;
 using Notes.Web.Dtos.Account.Register;
 
 namespace Notes.Web.Services.Interfaces;
 
 public partial interface IApiService
 {
-    Task<RegistrationResponseDto> RegisterUserAsync(RegisterCommand request);
-    Task<AuthResponseDto> LoginAsync(LoginCommand request);
+    Task RegisterUserAsync(RegisterCommand request);
+    Task LoginAsync(LoginCommand request);
+    Task Logout();
+    Task<CurrentUserDto> CurrentUserInfo();
 }
