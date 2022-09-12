@@ -1,57 +1,64 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
-using Notes.Web.Dtos.Account.CurrentUser;
 using Notes.Web.Dtos.Account.Login;
 using Notes.Web.Dtos.Account.Register;
 using Notes.Web.Services.Interfaces;
 using System.Security.Claims;
+using Blazored.LocalStorage;
 
 namespace Notes.Web.Services;
 
 public class CustomStateProvider : AuthenticationStateProvider
 {
     private readonly IApiService _apiService;
-    private CurrentUserDto? _currentUser;
-    public CustomStateProvider(IApiService apiService) => 
+    //private CurrentUserDto? _currentUser;
+    private readonly ILocalStorageService _localStorage;
+    private readonly AuthenticationState _anonymous;
+    public CustomStateProvider(IApiService apiService, ILocalStorageService localStorage)
+    {
         _apiService = apiService;
+        _localStorage = localStorage;
+        _anonymous = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
+    }
+
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
-        var identity = new ClaimsIdentity();
-        try
-        {
-            var userInfo = await GetCurrentUser();
-            if (userInfo.IsAuthenticated && _currentUser is not null)
-            {
-                var claims = new[] { new Claim(ClaimTypes.Name, _currentUser.UserName!) }.Concat(_currentUser.Claims!.Select(c => new Claim(c.Key, c.Value)));
-                identity = new ClaimsIdentity(claims, "Server authentication");
-            }
-        }
-        catch (HttpRequestException ex)
-        {
-            Console.WriteLine("Request failed:" + ex.ToString());
-        }
-        return new AuthenticationState(new ClaimsPrincipal(identity));
+        var token = await _localStorage.GetItemAsync<string>("authToken");
+
+        if (string.IsNullOrWhiteSpace(token))
+            return _anonymous;
+
+        return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(JwtParser.ParseClaimsFromJwt(token), "jwtAuthType")));
     }
-    private async Task<CurrentUserDto> GetCurrentUser()
+    //private async Task<CurrentUserDto> GetCurrentUserAsync()
+    //{
+    //    if (_currentUser != null && _currentUser.IsAuthenticated) return _currentUser;
+    //    _currentUser = await _apiService.CurrentUserInfo();
+    //    return _currentUser;
+    //}
+
+    public async Task LogoutAsync()
     {
-        if (_currentUser != null && _currentUser.IsAuthenticated) return _currentUser;
-        _currentUser = await _apiService.CurrentUserInfo();
-        return _currentUser;
-    }
-    public async Task Logout()
-    {
-        await _apiService.Logout();
-        _currentUser = null;
+        await _apiService.LogoutAsync();
+
+        await _localStorage.RemoveItemAsync("authToken");
+        //_currentUser = null;
         NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
     }
-    public async Task Login(LoginCommand loginParameters)
+    public async Task LoginAsync(LoginCommand command)
     {
-        await _apiService.LoginAsync(loginParameters);
+        var result = await _apiService.LoginAsync(command);
+
+        await _localStorage.SetItemAsync("authToken", result.Token);
+
         NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
     }
 
-    public async Task Register(RegisterCommand registerParameters)
+    public async Task RegisterAsync(RegisterCommand command)
     {
-        await _apiService.RegisterUserAsync(registerParameters);
+        var result =  await _apiService.RegisterUserAsync(command);
+
+        await _localStorage.SetItemAsync("authToken", result.Token);
+
         NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
     }
 }

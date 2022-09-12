@@ -5,10 +5,10 @@
         <Login />
     </NotAuthorized>
     <Authorized>
-        <h1>Hello @context?.User?.Identity?.Name !!</h1>
         <Header />
         <Sidebar />
         <main id="main" class="main">
+        <h1>Hello @context?.User?.Identity?.Name !!</h1>
             @Body
         </main>
     </Authorized>

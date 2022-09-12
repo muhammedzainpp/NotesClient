@@ -6,8 +6,8 @@ namespace Notes.Web.Services.Interfaces;
 
 public partial interface IApiService
 {
-    Task RegisterUserAsync(RegisterCommand request);
-    Task LoginAsync(LoginCommand request);
-    Task Logout();
+    Task<AuthResponseDto> RegisterUserAsync(RegisterCommand request);
+    Task<AuthResponseDto> LoginAsync(LoginCommand request);
+    Task LogoutAsync();
     Task<CurrentUserDto> CurrentUserInfo();
 }

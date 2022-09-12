@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -13,18 +14,19 @@ using Notes.Web.ViewModel.NoteViewModels.Interfaces;
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
+var services = builder.Services;
 
 AddHttp(builder);
 
-builder.Services.AddScoped<IApiService, ApiService>();
+services.AddScoped<IApiService, ApiService>();
 
-builder.Services.AddOptions();
-builder.Services.AddAuthorizationCore();
-builder.Services.AddScoped<CustomStateProvider>();
-builder.Services.AddScoped<AuthenticationStateProvider>(s => s.GetRequiredService<CustomStateProvider>());
+services.AddBlazoredLocalStorage();
+services.AddAuthorizationCore();
+services.AddScoped<CustomStateProvider>();
+services.AddScoped<AuthenticationStateProvider, CustomStateProvider>(s => s.GetRequiredService<CustomStateProvider>());
 
 //inject view models
-AddViewModels(builder);
+AddViewModels(services);
 
 await builder.Build().RunAsync();
 
@@ -35,10 +37,10 @@ static void AddHttp(WebAssemblyHostBuilder builder)
     builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(url) });
 }
 
-static void AddViewModels(WebAssemblyHostBuilder builder)
+static void AddViewModels(IServiceCollection services)
 {
-    builder.Services.AddScoped<ISaveNoteVm, SaveNoteVm>();
-    builder.Services.AddScoped<IListNoteVm, ListNoteVm>();
-    builder.Services.AddScoped<IRegisterVm, RegisterVm>();
-    builder.Services.AddScoped<ILoginVm, LoginVm>();
+    services.AddScoped<ISaveNoteVm, SaveNoteVm>();
+    services.AddScoped<IListNoteVm, ListNoteVm>();
+    services.AddScoped<IRegisterVm, RegisterVm>();
+    services.AddScoped<ILoginVm, LoginVm>();
 }

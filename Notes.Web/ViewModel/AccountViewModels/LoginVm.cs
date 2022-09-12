@@ -35,7 +35,7 @@ public class LoginVm : BaseVm, ILoginVm
 
         try
         {
-            await authStateProvider.Login(request);
+            await authStateProvider.LoginAsync(request);
             _navigationManager.NavigateTo("/");
         }
         catch (Exception ex)

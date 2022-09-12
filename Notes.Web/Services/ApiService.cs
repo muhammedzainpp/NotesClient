@@ -22,13 +22,14 @@ public partial class ApiService : IApiService
             var httpResponse = await _client.SendAsync(request);
             httpResponse.EnsureSuccessStatusCode();
             var content = await httpResponse.Content.ReadAsStringAsync();
-            var response = JsonSerializer.Deserialize<TResponse>(content);
+            var response = JsonSerializer.Deserialize<TResponse>(content, 
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true});
 
             if (response is null) throw new NullReferenceException();
 
             return response;
         }
-        catch (Exception)
+        catch (Exception e)
         {
 
             throw;
