@@ -4,6 +4,7 @@ using System.Text;
 using System.Net.Http.Headers;
 using System;
 using System.Net.Http.Json;
+using Blazored.LocalStorage;
 
 namespace Notes.Web.Services;
 
@@ -11,14 +12,22 @@ public partial class ApiService : IApiService
 {
     private const string MediaType = "application/json";
     private readonly HttpClient _client;
+    private readonly ILocalStorageService _localStorage;
 
-	public ApiService(HttpClient client) => _client = client;
+    public ApiService(HttpClient client, ILocalStorageService localStorage)
+    {
+        _client = client;
+        _localStorage = localStorage;
+    }
 
-	private async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest? requestBody, string url)
+    private async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest? requestBody, string url)
 	{
         try
         {           
             var request = GetHttpRequest(url, requestBody , HttpMethod.Post);
+
+            var token = await _localStorage.GetItemAsync<string>("authToken");
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
             var httpResponse = await _client.SendAsync(request);
             httpResponse.EnsureSuccessStatusCode();
             var content = await httpResponse.Content.ReadAsStringAsync();
