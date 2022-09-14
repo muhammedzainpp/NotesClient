@@ -20,19 +20,22 @@ public partial class ApiService : IApiService
         _localStorage = localStorage;
     }
 
-    private async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest? requestBody, string url)
-	{
+    private async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest? requestBody, string url, bool autherize = true)
+    {
         try
-        {           
-            var request = GetHttpRequest(url, requestBody , HttpMethod.Post);
+        {
+            var request = GetHttpRequest(url, requestBody, HttpMethod.Post);
 
-            var token = await _localStorage.GetItemAsync<string>("authToken");
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+            if (autherize)
+            {
+                var token = await _localStorage.GetItemAsync<string>("authToken");
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+            }
             var httpResponse = await _client.SendAsync(request);
             httpResponse.EnsureSuccessStatusCode();
             var content = await httpResponse.Content.ReadAsStringAsync();
-            var response = JsonSerializer.Deserialize<TResponse>(content, 
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true});
+            var response = JsonSerializer.Deserialize<TResponse>(content,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
             if (response is null) throw new NullReferenceException();
 

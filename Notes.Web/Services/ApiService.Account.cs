@@ -23,7 +23,7 @@ public partial class ApiService
     public async Task<AuthResponseDto> LoginAsync(LoginCommand request)
     {
         var url = "Account/Login";
-        var response = await PostAsync<LoginCommand, AuthResponseDto>(request, url);
+        var response = await PostAsync<LoginCommand, AuthResponseDto>(request, url, false);
 
         return response;
     }

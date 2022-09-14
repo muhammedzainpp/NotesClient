@@ -1,4 +1,6 @@
-﻿using Notes.Web.Dtos.Account.Register;
+﻿using Microsoft.AspNetCore.Components;
+using Notes.Web.Dtos.Account.Register;
+using Notes.Web.Services;
 using Notes.Web.Services.Interfaces;
 using Notes.Web.ViewModel.AccountViewModels.Interfaces;
 using Notes.Web.ViewModel.Base;
@@ -7,8 +9,14 @@ namespace Notes.Web.ViewModel.AccountViewModels;
 
 public class RegisterVm : BaseVm, IRegisterVm
 {
-    public RegisterVm(IApiService apiService) : base(apiService)
+    private readonly NavigationManager _navigationManager;
+    private readonly CustomStateProvider authStateProvider;
+
+    public RegisterVm(IApiService apiService, NavigationManager navigationManager, 
+        CustomStateProvider authStateProvider) : base(apiService)
     {
+        _navigationManager = navigationManager;
+        this.authStateProvider = authStateProvider;
     }
     public string FirstName { get; set; } = default!;
     public string? LastName { get; set; }
@@ -24,9 +32,19 @@ public class RegisterVm : BaseVm, IRegisterVm
         {
             Email = Email,
             Password = Password,
-            ConfirmPassword = ConfirmPassword
+            //ConfirmPassword = ConfirmPassword,
+            FirstName = FirstName,
+            LastName = LastName,
         };
 
-        await _apiService.RegisterUserAsync(request);
+        try
+        {
+            await authStateProvider.RegisterAsync(request);
+            _navigationManager.NavigateTo("/");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
 }
