@@ -38,7 +38,7 @@ public class CustomStateProvider : AuthenticationStateProvider
         return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(result.Claims, "jwtAuthType")));
     }
 
-    public void NotifyAuthStateChanged(List<MyClaim>? claims = null)
+    public void NotifyAuthStateChanged(List<AuthClaim>? claims = null)
     {
         var task = (claims is null) ?
             Task.FromResult(new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()))) ://anonymous
