@@ -3,7 +3,7 @@ using Notes.Web.ViewModel.NoteViewModels.Interfaces;
 
 namespace Notes.Web.Views.NoteViews;
 
-public partial class SaveNote
+public partial class SaveNoteView
 {
     [Inject]
     public ISaveNoteVm Vm { get; set; } = default!;
