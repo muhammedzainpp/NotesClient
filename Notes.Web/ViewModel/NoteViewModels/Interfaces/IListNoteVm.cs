@@ -1,8 +1,10 @@
-﻿namespace Notes.Web.ViewModel.NoteViewModels.Interfaces;
+﻿using Notes.Web.Dtos.Notes.GetNotesQuery;
+
+namespace Notes.Web.ViewModel.NoteViewModels.Interfaces;
 
 public interface IListNoteVm
 {
-    int Id { get; set; }
-    string Title { get; set; }
-    string? Description { get; set; }
+    public IEnumerable<GetNotesDto>? Notes { get; set; }
+
+    Task GetNotesAsync();
 }

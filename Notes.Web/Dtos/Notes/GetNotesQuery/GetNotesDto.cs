@@ -1,6 +1,6 @@
-﻿namespace Notes.Web.Dtos.Notes.SaveNoteCommand
+﻿namespace Notes.Web.Dtos.Notes.GetNotesQuery
 {
-    public class SaveNoteCommand
+    public class GetNotesDto
     {
         public int Id { get; set; }
         public string Title { get; set; } = default!;

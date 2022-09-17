@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Notes.Web;
+using Notes.Web.Models;
 using Notes.Web.Models.Configurations;
 using Notes.Web.Services;
 using Notes.Web.Services.Interfaces;
@@ -20,8 +21,8 @@ AddHttp(builder);
 
 services.AddScoped<IApiService, ApiService>();
 services.AddScoped<IIdentityService, IdentityService>();
+services.AddSingleton<Settings>();
 
-//services.AddOptions();
 services.AddBlazoredLocalStorage();
 services.AddAuthorizationCore();
 services.AddScoped<CustomStateProvider>();

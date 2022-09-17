@@ -1,0 +1,24 @@
+﻿
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Saved Notes</h5>
+        <!-- List group with Advanced Contents -->
+
+        <div class="list-group">
+            @if (Vm.Notes is not null)
+            {
+                foreach (var note in Vm.Notes)
+                {
+                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">@note.Title</h5>
+                            <small>3 days ago</small>
+                        </div>
+                        <p class="mb-1">@note.Description</p>
+                        <small>And some small print.</small>
+                    </a>
+                }
+            }
+        </div>
+    </div>
+</div>

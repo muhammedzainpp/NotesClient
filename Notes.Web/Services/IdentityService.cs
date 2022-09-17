@@ -6,6 +6,7 @@ using Notes.Web.Models.Constants;
 using Notes.Web.Services.Interfaces;
 using Blazored.LocalStorage;
 using Notes.Web.Dtos.Account.Logout;
+using Notes.Web.Models;
 
 namespace Notes.Web.Services;
 
@@ -13,18 +14,20 @@ public class IdentityService : IIdentityService
 {
     private readonly IApiService _apiService;
     private readonly ILocalStorageService _localStorage;
+    private readonly Settings _settings;
 
-    public IdentityService(IApiService apiService, ILocalStorageService localStorage)
+    public IdentityService(IApiService apiService, ILocalStorageService localStorage, Settings settings)
     {
         _apiService = apiService;
         _localStorage = localStorage;
+        _settings = settings;
     }
 
     public async Task<AuthResponseDto> LoginAsync(LoginDto request)
     {
         var result = await _apiService.LoginAsync(request);
 
-        await OnSuccessfulAuthentication(result);
+        await OnSuccessfulAuthenticationAsync(result);
 
         return result;
     }
@@ -33,7 +36,7 @@ public class IdentityService : IIdentityService
     {
         var result = await _apiService.RegisterUserAsync(request);
 
-        await OnSuccessfulAuthentication(result);
+        await OnSuccessfulAuthenticationAsync(result);
 
         return result;
     }
@@ -42,7 +45,7 @@ public class IdentityService : IIdentityService
     {
         var result = await _apiService.RefreshTokenAsync(request);
 
-        await OnSuccessfulAuthentication(result);
+        await OnSuccessfulAuthenticationAsync(result);
 
         return result;
     }
@@ -56,8 +59,11 @@ public class IdentityService : IIdentityService
         await _localStorage.RemoveItemAsync(LocalStorageConstants.RefreshTokenExpiryTime);
     }
 
-    private async Task OnSuccessfulAuthentication(AuthResponseDto result)
+    private async Task OnSuccessfulAuthenticationAsync(AuthResponseDto result)
     {
+        _settings.UserId = result.UserId;
+        _settings.FirstName = result.FirstName;
+
         await _localStorage.SetItemAsync(LocalStorageConstants.AuthToken, result.Token);
         await _localStorage.SetItemAsync(LocalStorageConstants.RefreshToken, result.RefreshToken);
         await _localStorage.SetItemAsync(LocalStorageConstants.RefreshTokenExpiryTime, result.RefreshTokenExpiryTime.ToString());
