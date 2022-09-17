@@ -1,5 +1,4 @@
 ﻿@inherits LayoutComponentBase
-@inject Settings Settings
 
 <AuthorizeView>
     <NotAuthorized>
@@ -9,7 +8,6 @@
         <Header />
         <Sidebar />
         <main id="main" class="main">
-            <h1>Hello @Settings.FirstName !!</h1>
             @Body
         </main>
     </Authorized>
