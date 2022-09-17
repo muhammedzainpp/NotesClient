@@ -16,7 +16,8 @@ public class IdentityService : IIdentityService
     private readonly ILocalStorageService _localStorage;
     private readonly Settings _settings;
 
-    public IdentityService(IApiService apiService, ILocalStorageService localStorage, Settings settings)
+    public IdentityService(IApiService apiService, ILocalStorageService localStorage, 
+        Settings settings)
     {
         _apiService = apiService;
         _localStorage = localStorage;

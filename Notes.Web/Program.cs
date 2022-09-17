@@ -11,6 +11,8 @@ using Notes.Web.ViewModel.AccountViewModels;
 using Notes.Web.ViewModel.AccountViewModels.Interfaces;
 using Notes.Web.ViewModel.NoteViewModels;
 using Notes.Web.ViewModel.NoteViewModels.Interfaces;
+using Notes.Web.ViewModel.UserProfileViewModals;
+using Notes.Web.ViewModel.UserProfileViewModals.InterFaces;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -47,4 +49,5 @@ static void AddViewModels(IServiceCollection services)
     services.AddScoped<IRegisterVm, RegisterVm>();
     services.AddScoped<ILoginVm, LoginVm>();
     services.AddScoped<ILogoutVm, LogoutVm>();
+    services.AddScoped<IEditUserProfileVm, EditUserProfileVm>();
 }

@@ -29,6 +29,7 @@ public class CustomStateProvider : AuthenticationStateProvider
         if (string.IsNullOrWhiteSpace(refreshToken) || string.IsNullOrWhiteSpace(refreshTokenExpiry)
             || DateTimeOffset.Parse(refreshTokenExpiry).UtcDateTime <= DateTimeOffset.UtcNow
             || string.IsNullOrWhiteSpace(token))
+
             return _anonymous;
 
         var request = new RefreshTokenDto { RefreshToken = refreshToken, Token = token };

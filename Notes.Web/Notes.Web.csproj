@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <None Include="Shared\Header.razor" />
+    <None Include="Views\UserProfileViews\EditUserProfileView.razor" />
   </ItemGroup>
 
 </Project>
