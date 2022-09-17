@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Components\Base\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Shared\Header.razor" />
   </ItemGroup>
 
