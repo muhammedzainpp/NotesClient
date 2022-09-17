@@ -1,64 +1,49 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
-using Notes.Web.Dtos.Account.Login;
-using Notes.Web.Dtos.Account.Register;
 using Notes.Web.Services.Interfaces;
 using System.Security.Claims;
 using Blazored.LocalStorage;
+using Notes.Web.Models.Constants;
+using Notes.Web.Dtos.Account.Refresh;
+using Notes.Web.Dtos.Account;
 
 namespace Notes.Web.Services;
 
 public class CustomStateProvider : AuthenticationStateProvider
 {
-    private readonly IApiService _apiService;
-    //private CurrentUserDto? _currentUser;
     private readonly ILocalStorageService _localStorage;
+    private readonly IIdentityService _identityService;
     private readonly AuthenticationState _anonymous;
-    public CustomStateProvider(IApiService apiService, ILocalStorageService localStorage)
+    public CustomStateProvider(ILocalStorageService localStorage, IIdentityService identityService)
     {
-        _apiService = apiService;
         _localStorage = localStorage;
+        _identityService = identityService;
         _anonymous = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
     }
 
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
-        var token = await _localStorage.GetItemAsync<string>("authToken");
+        var refreshToken = await _localStorage.GetItemAsync<string>(LocalStorageConstants.RefreshToken);
+        var refreshTokenExpiry = await _localStorage.GetItemAsync<string>(LocalStorageConstants.RefreshTokenExpiryTime);
+        var token = await _localStorage.GetItemAsync<string>(LocalStorageConstants.AuthToken);
 
-        if (string.IsNullOrWhiteSpace(token))
+        if (string.IsNullOrWhiteSpace(refreshToken) || string.IsNullOrWhiteSpace(refreshTokenExpiry)
+            || DateTimeOffset.Parse(refreshTokenExpiry).UtcDateTime <= DateTimeOffset.UtcNow
+            || string.IsNullOrWhiteSpace(token))
             return _anonymous;
 
-        return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(JwtParser.ParseClaimsFromJwt(token), "jwtAuthType")));
-    }
-    //private async Task<CurrentUserDto> GetCurrentUserAsync()
-    //{
-    //    if (_currentUser != null && _currentUser.IsAuthenticated) return _currentUser;
-    //    _currentUser = await _apiService.CurrentUserInfo();
-    //    return _currentUser;
-    //}
+        var request = new RefreshTokenDto { RefreshToken = refreshToken, Token = token };
 
-    public async Task LogoutAsync()
-    {
-        await _apiService.LogoutAsync();
+        var result = await _identityService.RefreshTokenAsync(request);
 
-        await _localStorage.RemoveItemAsync("authToken");
-        //_currentUser = null;
-        NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
-    }
-    public async Task LoginAsync(LoginCommand command)
-    {
-        var result = await _apiService.LoginAsync(command);
-
-        await _localStorage.SetItemAsync("authToken", result.Token);
-
-        NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
+        return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(result.Claims, "jwtAuthType")));
     }
 
-    public async Task RegisterAsync(RegisterCommand command)
+    public void NotifyAuthStateChanged(List<MyClaim>? claims = null)
     {
-        var result =  await _apiService.RegisterUserAsync(command);
+        var task = (claims is null) ?
+            Task.FromResult(new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()))) ://anonymous
+            Task.FromResult(new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(claims, "jwtAuthType"))));
 
-        await _localStorage.SetItemAsync("authToken", result.Token);
-
-        NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
+        NotifyAuthenticationStateChanged(task);
     }
 }

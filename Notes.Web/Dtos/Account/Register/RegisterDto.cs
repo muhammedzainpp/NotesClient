@@ -1,6 +1,6 @@
 ﻿namespace Notes.Web.Dtos.Account.Register;
 
-public class RegisterCommand
+public class RegisterDto
 {
     public string FirstName { get; set; } = default!;
     public string? LastName { get; set; }

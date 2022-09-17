@@ -10,13 +10,15 @@ namespace Notes.Web.ViewModel.AccountViewModels;
 public class RegisterVm : BaseVm, IRegisterVm
 {
     private readonly NavigationManager _navigationManager;
-    private readonly CustomStateProvider authStateProvider;
+    private readonly IIdentityService _identityService;
+    private readonly CustomStateProvider _authState;
 
-    public RegisterVm(IApiService apiService, NavigationManager navigationManager, 
-        CustomStateProvider authStateProvider) : base(apiService)
+    public RegisterVm(IApiService apiService, NavigationManager navigationManager,
+        IIdentityService identityService, CustomStateProvider authState) : base(apiService)
     {
         _navigationManager = navigationManager;
-        this.authStateProvider = authStateProvider;
+        _identityService = identityService;
+        _authState = authState;
     }
     public string FirstName { get; set; } = default!;
     public string? LastName { get; set; }
@@ -28,23 +30,17 @@ public class RegisterVm : BaseVm, IRegisterVm
 
     public async Task RegisterUserAsync()
     {
-        var request = new RegisterCommand
+        var request = new RegisterDto
         {
             Email = Email,
             Password = Password,
-            //ConfirmPassword = ConfirmPassword,
             FirstName = FirstName,
             LastName = LastName,
         };
 
-        try
-        {
-            await authStateProvider.RegisterAsync(request);
-            _navigationManager.NavigateTo("/");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex);
-        }
+        var result = await _identityService.RegisterAsync(request);
+
+        _authState.NotifyAuthStateChanged(result.Claims);
+        _navigationManager.NavigateTo("/");
     }
 }

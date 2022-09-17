@@ -19,7 +19,9 @@ var services = builder.Services;
 AddHttp(builder);
 
 services.AddScoped<IApiService, ApiService>();
+services.AddScoped<IIdentityService, IdentityService>();
 
+//services.AddOptions();
 services.AddBlazoredLocalStorage();
 services.AddAuthorizationCore();
 services.AddScoped<CustomStateProvider>();

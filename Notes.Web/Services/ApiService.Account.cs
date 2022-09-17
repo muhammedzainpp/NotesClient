@@ -1,33 +1,36 @@
-﻿using Notes.Web.Dtos.Account.CurrentUser;
+﻿using Notes.Web.Dtos.Account;
 using Notes.Web.Dtos.Account.Login;
+using Notes.Web.Dtos.Account.Refresh;
 using Notes.Web.Dtos.Account.Register;
 
 namespace Notes.Web.Services;
 
 public partial class ApiService
 {
-    public  async Task<AuthResponseDto> RegisterUserAsync(RegisterCommand request)
+    public async Task<AuthResponseDto> RegisterUserAsync(RegisterDto request)
     {
         var url = "Account/Registration";
-        var response = await PostAsync<RegisterCommand, AuthResponseDto>(request, url);
+        var response = await PostAsync<RegisterDto, AuthResponseDto>(request, url);
 
         return response;
     }
 
-    public async Task<CurrentUserDto> CurrentUserInfo()
-    {
-        var result = await GetAsync<CurrentUserDto>("account/currentuserinfo");
-        return result!;
-    }
-
-    public async Task<AuthResponseDto> LoginAsync(LoginCommand request)
+    public async Task<AuthResponseDto> LoginAsync(LoginDto request)
     {
         var url = "Account/Login";
-        var response = await PostAsync<LoginCommand, AuthResponseDto>(request, url, false);
+        var response = await PostAsync<LoginDto, AuthResponseDto>(request, url, false);
 
         return response;
     }
 
-    public async Task LogoutAsync() => 
-        await PostAsync<object>(null, "auth/logout");
+    public async Task LogoutAsync() =>
+        await PostAsync<object>(null, "Account/logout");
+
+    public async Task<AuthResponseDto> RefreshTokenAsync(RefreshTokenDto request)
+    {
+        var url = "Account/refreshToken";
+        var response = await PostAsync<RefreshTokenDto, AuthResponseDto>(request, url, false);
+
+        return response;
+    }
 }
