@@ -2,5 +2,5 @@
 
 public class LogoutDto
 {
-    public string RefreshToken { get; set; } = default!;
+    public int UserId { get; set; } = default!;
 }

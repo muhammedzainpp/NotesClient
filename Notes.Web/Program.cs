@@ -46,4 +46,5 @@ static void AddViewModels(IServiceCollection services)
     services.AddScoped<IListNoteVm, ListNoteVm>();
     services.AddScoped<IRegisterVm, RegisterVm>();
     services.AddScoped<ILoginVm, LoginVm>();
+    services.AddScoped<ILogoutVm, LogoutVm>();
 }

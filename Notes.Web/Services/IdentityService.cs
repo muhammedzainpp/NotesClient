@@ -52,7 +52,7 @@ public class IdentityService : IIdentityService
 
     public async Task LogoutAsync(LogoutDto request)
     {
-        await _apiService.LogoutAsync();
+        await _apiService.LogoutAsync(request);
 
         await _localStorage.RemoveItemAsync(LocalStorageConstants.AuthToken);
         await _localStorage.RemoveItemAsync(LocalStorageConstants.RefreshToken);

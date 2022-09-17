@@ -1,5 +1,6 @@
 ﻿using Notes.Web.Dtos.Account;
 using Notes.Web.Dtos.Account.Login;
+using Notes.Web.Dtos.Account.Logout;
 using Notes.Web.Dtos.Account.Refresh;
 using Notes.Web.Dtos.Account.Register;
 
@@ -23,8 +24,8 @@ public partial class ApiService
         return response;
     }
 
-    public async Task LogoutAsync() =>
-        await PostAsync<object>(null, "Account/logout");
+    public async Task LogoutAsync(LogoutDto request) =>
+        await PostAsync(request, "Account/logout");
 
     public async Task<AuthResponseDto> RefreshTokenAsync(RefreshTokenDto request)
     {
