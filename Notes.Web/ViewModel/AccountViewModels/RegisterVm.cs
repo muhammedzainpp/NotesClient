@@ -41,6 +41,5 @@ public class RegisterVm : BaseVm, IRegisterVm
         var result = await _identityService.RegisterAsync(request);
 
         _authState.NotifyAuthStateChanged(result.Claims);
-        _navigationManager.NavigateTo("/");
     }
 }

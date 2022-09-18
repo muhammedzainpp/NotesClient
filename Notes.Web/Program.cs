@@ -49,5 +49,6 @@ static void AddViewModels(IServiceCollection services)
     services.AddScoped<IRegisterVm, RegisterVm>();
     services.AddScoped<ILoginVm, LoginVm>();
     services.AddScoped<ILogoutVm, LogoutVm>();
-    services.AddScoped<IEditUserProfileVm, EditUserProfileVm>();
+    services.AddScoped<IUserProfileVm, UserProfileVm>();
+    services.AddScoped<IFullNameVm, FullNameVm>();
 }

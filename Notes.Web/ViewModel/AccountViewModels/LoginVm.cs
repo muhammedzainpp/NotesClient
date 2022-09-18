@@ -38,6 +38,5 @@ public class LoginVm : BaseVm, ILoginVm
         var result = await _identityService.LoginAsync(request);
 
         _authState.NotifyAuthStateChanged(result.Claims);
-        _navigationManager.NavigateTo("/");
     }
 }

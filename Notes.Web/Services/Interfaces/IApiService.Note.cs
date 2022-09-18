@@ -6,5 +6,5 @@ namespace Notes.Web.Services.Interfaces;
 public partial interface IApiService
 {
     Task<int> SaveNoteAsync(SaveNoteCommand request);
-    Task<IEnumerable<GetNotesDto>?> GetNotesAsync();
+    Task<IEnumerable<GetNotesDto>?> GetNotesAsync( );
 }
