@@ -7,7 +7,7 @@ namespace Notes.Web.Tests.Unit.ViewModels;
 public partial class SaveNoteVmTests
 {
     [Fact]
-    public async Task ShouldCreateNote()
+    public async Task ShouldCreateNoteAsync()
     {
         //given
         var randomNote = CreateRandomNote();
