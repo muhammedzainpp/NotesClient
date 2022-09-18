@@ -5,7 +5,7 @@ using Notes.Web.ViewModel.NoteViewModels.Interfaces;
 
 namespace Notes.Web.ViewModel.NoteViewModels;
 
-public class SaveNoteVm : BaseVm, ISaveNoteVm
+public partial class SaveNoteVm : BaseVm, ISaveNoteVm
 {
     private readonly ISettings _settings;
 
@@ -16,11 +16,12 @@ public class SaveNoteVm : BaseVm, ISaveNoteVm
     public string Title { get; set; } = default!;
     public string? Description { get; set; }
 
-    public async Task<int> SaveNoteAsync()
-    {
-        var command = this.MapTo(_settings);
-
-        var result = await _apiService.SaveNoteAsync(command);
-        return result;
-    }
+    public async Task<int> SaveNoteAsync() => 
+        await TryCatchAsync(async () =>
+            {
+                var command = this.MapTo(_settings);
+                ValidateNote(command);
+                var result = await _apiService.SaveNoteAsync(command);
+                return result;
+            });
 }
