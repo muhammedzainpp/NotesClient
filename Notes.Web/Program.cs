@@ -23,7 +23,7 @@ AddHttp(builder);
 
 services.AddScoped<IApiService, ApiService>();
 services.AddScoped<IIdentityService, IdentityService>();
-services.AddSingleton<Settings>();
+services.AddSingleton<ISettings, Settings>();
 
 services.AddBlazoredLocalStorage();
 services.AddAuthorizationCore();

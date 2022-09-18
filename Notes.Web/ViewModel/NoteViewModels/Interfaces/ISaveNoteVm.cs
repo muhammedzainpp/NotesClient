@@ -6,5 +6,5 @@ public interface ISaveNoteVm
     string Title { get; set; }
     string? Description { get; set; }
 
-    Task SaveNoteAsync();
+    Task<int> SaveNoteAsync();
 }

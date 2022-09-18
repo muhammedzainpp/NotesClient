@@ -10,10 +10,10 @@ namespace Notes.Web.ViewModel.UserProfileViewModals;
 
 public class UserProfileVm : BaseVm, IUserProfileVm
 {
-    private readonly Settings _settings;
+    private readonly ISettings _settings;
     private readonly IFullNameVm _fullNameVm;
 
-    public UserProfileVm(IApiService apiService, Settings settings, IFullNameVm fullNameVm) : base(apiService)
+    public UserProfileVm(IApiService apiService, ISettings settings, IFullNameVm fullNameVm) : base(apiService)
     {
         _settings = settings;
         _fullNameVm = fullNameVm;

@@ -4,10 +4,10 @@ namespace Notes.Web.ViewModel.AccountViewModels.Interfaces;
 
 public class FullNameVm : IFullNameVm
 {
-    private readonly Settings _settings;
+    private readonly ISettings _settings;
     private string _firstName = default!;
 
-    public FullNameVm(Settings settings) => _settings = settings;
+    public FullNameVm(ISettings settings) => _settings = settings;
 
     public Action? NotifyStateChanged { get; set; }
     public string FirstName

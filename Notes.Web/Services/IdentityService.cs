@@ -14,10 +14,10 @@ public class IdentityService : IIdentityService
 {
     private readonly IApiService _apiService;
     private readonly ILocalStorageService _localStorage;
-    private readonly Settings _settings;
+    private readonly ISettings _settings;
 
     public IdentityService(IApiService apiService, ILocalStorageService localStorage, 
-        Settings settings)
+        ISettings settings)
     {
         _apiService = apiService;
         _localStorage = localStorage;

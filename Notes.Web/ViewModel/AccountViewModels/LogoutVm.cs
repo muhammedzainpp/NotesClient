@@ -10,11 +10,11 @@ namespace Notes.Web.ViewModel.AccountViewModels;
 public class LogoutVm : ILogoutVm
 {
     private readonly IIdentityService _identityService;
-    private readonly Settings _settings;
+    private readonly ISettings _settings;
     private readonly CustomStateProvider _authState;
 
     public LogoutVm(IIdentityService identityService, 
-        Settings settings, AuthenticationStateProvider authState)
+        ISettings settings, AuthenticationStateProvider authState)
     {
         _identityService = identityService;
         _settings = settings;
