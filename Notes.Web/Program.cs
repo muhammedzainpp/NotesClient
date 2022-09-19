@@ -22,14 +22,11 @@ var services = builder.Services;
 
 AddHttp(builder);
 
-services.AddScoped<IApiService, ApiService>();
-services.AddScoped<IIdentityService, IdentityService>();
+AddServices(services);
 services.AddSingleton<ISettings, Settings>();
 
 services.AddBlazoredLocalStorage();
 services.AddAuthorizationCore();
-services.AddScoped<CustomStateProvider>();
-services.AddScoped<AuthenticationStateProvider, CustomStateProvider>(s => s.GetRequiredService<CustomStateProvider>());
 
 //inject view models
 AddViewModels(services);
@@ -45,12 +42,24 @@ static void AddHttp(WebAssemblyHostBuilder builder)
 
 static void AddViewModels(IServiceCollection services)
 {
-    services.AddScoped<ISaveNoteVm, SaveNoteVm>();
-    services.AddScoped<IListNoteVm, ListNoteVm>();
-    services.AddScoped<IRegisterVm, RegisterVm>();
-    services.AddScoped<ILoginVm, LoginVm>();
-    services.AddScoped<ILogoutVm, LogoutVm>();
-    services.AddScoped<IUserProfileVm, UserProfileVm>();
+    services.AddTransient<ISaveNoteVm, SaveNoteVm>();
+    services.AddTransient<IListNoteVm, ListNoteVm>();
+    services.AddTransient<IRegisterVm, RegisterVm>();
+    services.AddTransient<ILoginVm, LoginVm>();
+    services.AddTransient<ILogoutVm, LogoutVm>();
+    services.AddTransient<IUserProfileVm, UserProfileVm>();
     services.AddScoped<IFullNameVm, FullNameVm>();
     services.AddTransient<IButtonWithSpinnerVm, ButtonWithSpinnerVm>();
+}
+
+static void AddServices(IServiceCollection services)
+{
+    services.AddScoped<CustomStateProvider>();
+    services.AddScoped<AuthenticationStateProvider, 
+        CustomStateProvider>(s => s.GetRequiredService<CustomStateProvider>());
+    services.AddScoped<IApiService, ApiService>();
+    services.AddScoped<IIdentityService, IdentityService>();
+    services.AddScoped<IAccountService, AccountService>();
+    services.AddScoped<INoteService, NoteService>();
+    services.AddScoped<IUserProfileService, UserProfileService>();
 }

@@ -1,6 +1,7 @@
 ﻿using Notes.Web.Models;
+using Notes.Web.ViewModel.AccountViewModels.Interfaces;
 
-namespace Notes.Web.ViewModel.AccountViewModels.Interfaces;
+namespace Notes.Web.ViewModel.AccountViewModels;
 
 public class FullNameVm : IFullNameVm
 {

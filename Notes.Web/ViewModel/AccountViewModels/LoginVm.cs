@@ -1,24 +1,18 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
+﻿using Microsoft.AspNetCore.Components.Authorization;
 using Notes.Web.Dtos.Account.Login;
 using Notes.Web.Services;
 using Notes.Web.Services.Interfaces;
 using Notes.Web.ViewModel.AccountViewModels.Interfaces;
-using Notes.Web.ViewModel.Base;
 
 namespace Notes.Web.ViewModel.AccountViewModels;
 
-public class LoginVm : BaseVm, ILoginVm
+public class LoginVm : ILoginVm
 {
-    private readonly NavigationManager _navigationManager;
     private readonly IIdentityService _identityService;
     private readonly CustomStateProvider _authState;
 
-    public LoginVm(IApiService apiService, NavigationManager navigation, IIdentityService identityService,
-        AuthenticationStateProvider authState)
-        : base(apiService)
+    public LoginVm(IIdentityService identityService, AuthenticationStateProvider authState)
     {
-        _navigationManager = navigation;
         _identityService = identityService;
         _authState = (authState as CustomStateProvider)!;
     }

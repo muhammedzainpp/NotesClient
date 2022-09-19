@@ -1,4 +1,4 @@
-﻿namespace Notes.Web.ViewModel.AccountViewModels
+﻿namespace Notes.Web.ViewModel.AccountViewModels.Interfaces
 {
     public interface IFullNameVm
     {

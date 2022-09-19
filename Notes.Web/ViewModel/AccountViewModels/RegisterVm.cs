@@ -3,23 +3,20 @@ using Notes.Web.Dtos.Account.Register;
 using Notes.Web.Services;
 using Notes.Web.Services.Interfaces;
 using Notes.Web.ViewModel.AccountViewModels.Interfaces;
-using Notes.Web.ViewModel.Base;
 
 namespace Notes.Web.ViewModel.AccountViewModels;
 
-public class RegisterVm : BaseVm, IRegisterVm
+public class RegisterVm : IRegisterVm
 {
-    private readonly NavigationManager _navigationManager;
     private readonly IIdentityService _identityService;
     private readonly CustomStateProvider _authState;
 
-    public RegisterVm(IApiService apiService, NavigationManager navigationManager,
-        IIdentityService identityService, CustomStateProvider authState) : base(apiService)
+    public RegisterVm(IIdentityService identityService, CustomStateProvider authState)
     {
-        _navigationManager = navigationManager;
         _identityService = identityService;
         _authState = authState;
     }
+
     public string FirstName { get; set; } = default!;
     public string? LastName { get; set; }
     public string Email { get; set; } = default!;

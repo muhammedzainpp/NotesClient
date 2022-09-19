@@ -1,21 +1,26 @@
 ﻿using Notes.Web.Dtos.UserProfile.GetUserProfileQuery;
 using Notes.Web.Dtos.UserProfile.SaveUserProfileCommand;
+using Notes.Web.Services.Interfaces;
 
 namespace Notes.Web.Services;
 
-public partial class ApiService
+public class UserProfileService : IUserProfileService
 {
+    private readonly IApiService _apiService;
+
+    public UserProfileService(IApiService apiService) => _apiService = apiService;
+
     public async Task<int> SaveUserAsync(SaveUserProfileCommand request)
     {
         var url = "userprofile";
-        var response = await PostAsync<SaveUserProfileCommand,int>(request,url);
+        var response = await _apiService.PostAsync<SaveUserProfileCommand,int>(request,url);
         return response;
     }
 
     public async Task<GetUserProfileDto?> GetUserAsync(int id)
     {
         var url = $"userprofile/{id}";
-        var response = await GetAsync<GetUserProfileDto>(url);
+        var response = await _apiService.GetAsync<GetUserProfileDto>(url);
         return response;
     }
 }

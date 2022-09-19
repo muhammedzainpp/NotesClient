@@ -2,21 +2,23 @@
 using Notes.Web.Dtos.UserProfile.SaveUserProfileCommand;
 using Notes.Web.Models;
 using Notes.Web.Services.Interfaces;
-using Notes.Web.ViewModel.AccountViewModels;
-using Notes.Web.ViewModel.Base;
+using Notes.Web.ViewModel.AccountViewModels.Interfaces;
 using Notes.Web.ViewModel.UserProfileViewModals.InterFaces;
 
 namespace Notes.Web.ViewModel.UserProfileViewModals;
 
-public class UserProfileVm : BaseVm, IUserProfileVm
+public class UserProfileVm : IUserProfileVm
 {
     private readonly ISettings _settings;
     private readonly IFullNameVm _fullNameVm;
+    private readonly IUserProfileService _service;
 
-    public UserProfileVm(IApiService apiService, ISettings settings, IFullNameVm fullNameVm) : base(apiService)
+    public UserProfileVm(IApiService apiService, ISettings settings, IFullNameVm fullNameVm,
+        IUserProfileService service)
     {
         _settings = settings;
         _fullNameVm = fullNameVm;
+        _service = service;
     }
 
     public int Id { get; set; }
@@ -33,7 +35,7 @@ public class UserProfileVm : BaseVm, IUserProfileVm
 
     public async Task GetUserProfileAsync()
     {
-        var result = await _apiService.GetUserAsync(_settings.UserId);
+        var result = await _service.GetUserAsync(_settings.UserId);
         MapToVm(result);
     }
 
@@ -57,7 +59,7 @@ public class UserProfileVm : BaseVm, IUserProfileVm
     {
         var request = MapToSaveUserProfileCommand();
 
-        await _apiService.SaveUserAsync(request);
+        await _service.SaveUserAsync(request);
 
         await GetUserProfileAsync();
 

@@ -6,7 +6,7 @@ using Notes.Web.Dtos.Account.Register;
 
 namespace Notes.Web.Services.Interfaces;
 
-public partial interface IApiService
+public interface IAccountService
 {
     Task<AuthResponseDto> RegisterUserAsync(RegisterDto request);
     Task<AuthResponseDto> LoginAsync(LoginDto request);

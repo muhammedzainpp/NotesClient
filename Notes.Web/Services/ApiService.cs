@@ -2,7 +2,6 @@
 using System.Text.Json;
 using System.Text;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using Blazored.LocalStorage;
 using Notes.Web.Models.Constants;
 using System.Net;
@@ -10,7 +9,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace Notes.Web.Services;
 
-public partial class ApiService : IApiService
+public class ApiService : IApiService
 {
     private const string MediaType = "application/json";
     private readonly HttpClient _client;
@@ -25,7 +24,7 @@ public partial class ApiService : IApiService
         _navManager = navManager;
     }
 
-    private async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest? requestBody, string url,
+    public async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest? requestBody, string url,
         bool autherize = true)
     {
 
@@ -42,7 +41,7 @@ public partial class ApiService : IApiService
     }
 
 
-    private async Task PostAsync<TRequest>(TRequest? requestBody, string url,
+    public async Task PostAsync<TRequest>(TRequest? requestBody, string url,
         bool autherize = true)
     {
         var request = HttpRequest(url, requestBody, HttpMethod.Post);
@@ -52,7 +51,7 @@ public partial class ApiService : IApiService
     }
 
 
-    private async Task<TResponse> PutAsync<TRequest, TResponse>(TRequest requestBody, string url,
+    public async Task<TResponse> PutAsync<TRequest, TResponse>(TRequest requestBody, string url,
         bool autherize = true)
     {
         var request = HttpRequest(url, requestBody, HttpMethod.Put);
@@ -70,7 +69,7 @@ public partial class ApiService : IApiService
         return response;
     }
 
-    private async Task PutAsync<TRequest>(TRequest? requestBody, string url, bool autherize = true)
+    public async Task PutAsync<TRequest>(TRequest? requestBody, string url, bool autherize = true)
     {
 
         var request = HttpRequest(url, requestBody, HttpMethod.Put);
@@ -79,7 +78,7 @@ public partial class ApiService : IApiService
         Validate(httpResponse);
     }
 
-    private async Task DeleteAsync(int id, string url, bool autherize = true)
+    public async Task DeleteAsync(int id, string url, bool autherize = true)
     {
 
         string requestUri = $"{url}/{id}";
@@ -90,7 +89,7 @@ public partial class ApiService : IApiService
         Validate(response);
     }
 
-    private async Task<TResponse?> GetAsync<TResponse>(string url, bool autherize = true)
+    public async Task<TResponse?> GetAsync<TResponse>(string url, bool autherize = true)
     {
         await Autherize(autherize);
         var httpResponse = await _client.GetAsync(url);
