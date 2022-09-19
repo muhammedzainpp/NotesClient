@@ -10,7 +10,8 @@ public partial class SaveNoteVm : BaseVm, ISaveNoteVm
 {
     private readonly ISettings _settings;
 
-    public SaveNoteVm(IApiService apiService, ISettings settings, IButtonWithSpinnerVm spinnerVm) : base(apiService)
+    public SaveNoteVm(IApiService apiService, ISettings settings, 
+        IButtonWithSpinnerVm spinnerVm) : base(apiService)
     {
         _settings = settings;
         SpinnerVm = spinnerVm;

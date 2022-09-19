@@ -2,6 +2,7 @@
 using Notes.Web.Dtos.Notes.SaveNoteCommand;
 using Notes.Web.Models;
 using Notes.Web.Services.Interfaces;
+using Notes.Web.ViewModel.ButtonWithSpinnerViewModel;
 using Notes.Web.ViewModel.NoteViewModels;
 using Notes.Web.ViewModel.NoteViewModels.Interfaces;
 using Tynamix.ObjectFiller;
@@ -12,13 +13,16 @@ public partial class SaveNoteVmTests
 {
     private readonly Mock<IApiService> _apiServiceMock;
     private readonly Mock<ISettings> _settingsMock;
+    private readonly Mock<IButtonWithSpinnerVm> _spinnerVmMock;
     private readonly ISaveNoteVm _vm;
 
     public SaveNoteVmTests()
     {
         _apiServiceMock = new Mock<IApiService>();
         _settingsMock = new Mock<ISettings>();
-        _vm = new SaveNoteVm(_apiServiceMock.Object, _settingsMock.Object);
+        _spinnerVmMock = new Mock<IButtonWithSpinnerVm>();
+        _vm = new SaveNoteVm(_apiServiceMock.Object, _settingsMock.Object,
+            _spinnerVmMock.Object);
     }
 
     private static SaveNoteCommand CreateRandomNote() =>
