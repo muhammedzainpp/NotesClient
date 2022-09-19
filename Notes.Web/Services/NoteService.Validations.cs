@@ -9,6 +9,7 @@ public partial class NoteService
     {
         switch (command)
         {
+            case null: throw new NullSaveNoteCommandException();
             case { } when IsInvalid(command.Title):
                 throw new InvalidSaveNoteCommandException(parameterName:nameof(SaveNoteCommand.Title),
                     parameterValue:command.Title);

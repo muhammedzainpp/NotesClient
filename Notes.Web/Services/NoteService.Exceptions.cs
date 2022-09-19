@@ -4,18 +4,23 @@ namespace Notes.Web.Services;
 
 public partial class NoteService
 {
-    private async Task<int> TryCatchAsync(Func<Task<int>> returningIntFunction)
+    private static async Task<int> TryCatchAsync(Func<Task<int>> returningIntFunction)
     {
 		try
 		{
 			return await returningIntFunction();
 		}
-		catch (InvalidSaveNoteCommandException exception)
+		catch (Exception exception)
 		{
 			throw exception switch
 			{
+				NullSaveNoteCommandException => 
+					new SaveNoteCommandValidationException(exception),
+
 				InvalidSaveNoteCommandException => 
-					new SaveNoteCommandValidationException(exception)
+					new SaveNoteCommandValidationException(exception),
+
+					_ => new Exception()
 			};
 		}
     }
