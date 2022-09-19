@@ -1,17 +1,17 @@
 ﻿using Notes.Web.Dtos.Notes.SaveNoteCommand;
 using Notes.Web.Exceptions.NoteExceptions;
 
-namespace Notes.Web.ViewModel.NoteViewModels;
+namespace Notes.Web.Services;
 
-public partial class SaveNoteVm
+public partial class NoteService
 {
     private void ValidateNote(SaveNoteCommand command)
     {
         switch (command)
         {
-            case { } when IsInvalid(Title):
-                throw new InvalidSaveNoteCommandException(parameterName:nameof(Title),
-                    parameterValue:Title);
+            case { } when IsInvalid(command.Title):
+                throw new InvalidSaveNoteCommandException(parameterName:nameof(SaveNoteCommand.Title),
+                    parameterValue:command.Title);
         }
     }
 

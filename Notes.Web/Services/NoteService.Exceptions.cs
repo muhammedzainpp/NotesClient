@@ -1,8 +1,8 @@
 ﻿using Notes.Web.Exceptions.NoteExceptions;
 
-namespace Notes.Web.ViewModel.NoteViewModels;
+namespace Notes.Web.Services;
 
-public partial class SaveNoteVm
+public partial class NoteService
 {
     private async Task<int> TryCatchAsync(Func<Task<int>> returningIntFunction)
     {
