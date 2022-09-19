@@ -5,6 +5,8 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using Blazored.LocalStorage;
 using Notes.Web.Models.Constants;
+using System.Net;
+using Microsoft.AspNetCore.Components;
 
 namespace Notes.Web.Services;
 
@@ -13,116 +15,88 @@ public partial class ApiService : IApiService
     private const string MediaType = "application/json";
     private readonly HttpClient _client;
     private readonly ILocalStorageService _localStorage;
+    private readonly NavigationManager _navManager;
 
-    public ApiService(HttpClient client, ILocalStorageService localStorage)
+    public ApiService(HttpClient client, ILocalStorageService localStorage,
+        NavigationManager navManager)
     {
         _client = client;
         _localStorage = localStorage;
+        _navManager = navManager;
     }
 
     private async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest? requestBody, string url,
         bool autherize = true)
     {
-        try
-        {
-            var request = HttpRequest(url, requestBody, HttpMethod.Post);
-            await Autherize(autherize);
-            var httpResponse = await _client.SendAsync(request);
-            httpResponse.EnsureSuccessStatusCode();
-            var content = await httpResponse.Content.ReadAsStringAsync();
-            var response = JsonSerializer.Deserialize<TResponse>(content,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-            if (response is null) throw new NullReferenceException();
+        var request = HttpRequest(url, requestBody, HttpMethod.Post);
+        await Autherize(autherize);
+        var httpResponse = await _client.SendAsync(request);
+        Validate(httpResponse);
+        var content = await httpResponse.Content.ReadAsStringAsync();
+        var response = JsonSerializer.Deserialize<TResponse>(content, Options());
 
-            return response;
-        }
-        catch (Exception e)
-        {
+        if (response is null) throw new NullReferenceException();
 
-            throw;
-        }
+        return response;
     }
 
 
-    private async Task PostAsync<TRequest>(TRequest? requestBody, string url, 
+    private async Task PostAsync<TRequest>(TRequest? requestBody, string url,
         bool autherize = true)
     {
-        try
-        {
-            var request = HttpRequest(url, requestBody, HttpMethod.Post);
-            await Autherize(autherize);
-            var httpResponse = await _client.SendAsync(request);
-            httpResponse.EnsureSuccessStatusCode();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+        var request = HttpRequest(url, requestBody, HttpMethod.Post);
+        await Autherize(autherize);
+        var response = await _client.SendAsync(request);
+        Validate(response);
     }
+
 
     private async Task<TResponse> PutAsync<TRequest, TResponse>(TRequest requestBody, string url,
         bool autherize = true)
     {
-        try
-        {
-            var request = HttpRequest(url, requestBody, HttpMethod.Put);
-            await Autherize(autherize);
-            var httpResponse = await _client.SendAsync(request);
-            httpResponse.EnsureSuccessStatusCode();
+        var request = HttpRequest(url, requestBody, HttpMethod.Put);
+        await Autherize(autherize);
+        var httpResponse = await _client.SendAsync(request);
+        httpResponse.EnsureSuccessStatusCode();
 
-            var content = await httpResponse.Content.ReadAsStringAsync();
-            var response = JsonSerializer.Deserialize<TResponse>(content);
+        var content = await httpResponse.Content.ReadAsStringAsync();
+        var response = JsonSerializer.Deserialize<TResponse>(content, Options());
 
-            if (response is null) throw new NullReferenceException();
+        Validate(httpResponse);
 
-            return response;
-        }
-        catch (Exception)
-        {
+        if (response is null) throw new NullReferenceException();
 
-            throw;
-        }
+        return response;
     }
 
     private async Task PutAsync<TRequest>(TRequest? requestBody, string url, bool autherize = true)
     {
-        try
-        {
-            var request = HttpRequest(url, requestBody, HttpMethod.Put);
-            await Autherize(autherize);
-            var httpResponse = await _client.SendAsync(request);
-            httpResponse.EnsureSuccessStatusCode();
-        }
-        catch (Exception)
-        {
 
-            throw;
-        }
+        var request = HttpRequest(url, requestBody, HttpMethod.Put);
+        await Autherize(autherize);
+        var httpResponse = await _client.SendAsync(request);
+        Validate(httpResponse);
     }
 
     private async Task DeleteAsync(int id, string url, bool autherize = true)
     {
-        try
-        {
-            string requestUri = $"{url}/{id}";
-            var request = new HttpRequestMessage(HttpMethod.Delete, requestUri);
-            await Autherize(autherize);
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaType));
-            var response = await _client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-        }
-        catch (Exception)
-        {
 
-            throw;
-        }
+        string requestUri = $"{url}/{id}";
+        var request = new HttpRequestMessage(HttpMethod.Delete, requestUri);
+        await Autherize(autherize);
+        request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaType));
+        var response = await _client.SendAsync(request);
+        Validate(response);
     }
 
     private async Task<TResponse?> GetAsync<TResponse>(string url, bool autherize = true)
     {
         await Autherize(autherize);
-        var response = await _client.GetFromJsonAsync<TResponse>(url);
+        var httpResponse = await _client.GetAsync(url);
+        Validate(httpResponse);
+        var content = await httpResponse.Content.ReadAsStringAsync();
+        var response = JsonSerializer.Deserialize<TResponse>(content, Options());
         return response;
     }
 
@@ -142,5 +116,30 @@ public partial class ApiService : IApiService
             var token = await _localStorage.GetItemAsync<string>(LocalStorageConstants.AuthToken);
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
         }
+    }
+    private void Validate(HttpResponseMessage response)
+    {
+        if (!response.IsSuccessStatusCode)
+        {
+            var statusCode = response.StatusCode;
+            switch (statusCode)
+            {
+                case HttpStatusCode.NotFound:
+                    _navManager.NavigateTo("/404");
+                    break;
+                case HttpStatusCode.Unauthorized:
+                    _navManager.NavigateTo("/unauthorized");
+                    break;
+                default:
+                    _navManager.NavigateTo("/500");
+                    break;
+            }
+
+            throw new ApplicationException($"Reasong: {response.ReasonPhrase}");
+        }
+    }
+    private static JsonSerializerOptions Options()
+    {
+        return new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
     }
 }
