@@ -9,6 +9,7 @@ using Notes.Web.Services;
 using Notes.Web.Services.Interfaces;
 using Notes.Web.ViewModel.AccountViewModels;
 using Notes.Web.ViewModel.AccountViewModels.Interfaces;
+using Notes.Web.ViewModel.ButtonWithSpinnerViewModel;
 using Notes.Web.ViewModel.NoteViewModels;
 using Notes.Web.ViewModel.NoteViewModels.Interfaces;
 using Notes.Web.ViewModel.UserProfileViewModals;
@@ -51,4 +52,5 @@ static void AddViewModels(IServiceCollection services)
     services.AddScoped<ILogoutVm, LogoutVm>();
     services.AddScoped<IUserProfileVm, UserProfileVm>();
     services.AddScoped<IFullNameVm, FullNameVm>();
+    services.AddTransient<IButtonWithSpinnerVm, ButtonWithSpinnerVm>();
 }
