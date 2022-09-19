@@ -2,9 +2,9 @@
 using Moq;
 using Notes.Web.Dtos.Notes.SaveNoteCommand;
 
-namespace Notes.Web.Tests.Unit.ViewModels;
+namespace Notes.Web.Tests.Unit.Services;
 
-public partial class SaveNoteVmTests
+public partial class NoteServiceTests
 {
     [Fact]
     public async Task ShouldCreateNoteAsync()
@@ -14,28 +14,22 @@ public partial class SaveNoteVmTests
         var inputNote = randomNote;
         var expectedNote = inputNote;
 
-        _settingsMock
-            .SetupGet(setting => setting.UserId)
-            .Returns(inputNote.Id);
-
-        _vm.Id = inputNote.Id;
-        _vm.Title = inputNote.Title;
-        _vm.Description = inputNote.Description;
-
         _apiServiceMock
-            .Setup(service => service.SaveNoteAsync(It.IsAny<SaveNoteCommand>()))
+            .Setup(service => service.PostAsync<SaveNoteCommand, int>(It.IsAny<SaveNoteCommand>(), 
+            It.IsAny<string>(), It.IsAny<bool>()))
             .Returns(Task.FromResult(inputNote.Id));
 
         //when
 
-        var actualNoteId = await _vm.SaveNoteAsync();
+        var actualNoteId = await _service.SaveNoteAsync(inputNote);
 
         //then
 
         actualNoteId.Should().Be(expectedNote.Id);
 
         _apiServiceMock.Verify(service => 
-            service.SaveNoteAsync(It.IsAny<SaveNoteCommand>()), Times.Once);
+            service.PostAsync<SaveNoteCommand, int>(It.IsAny<SaveNoteCommand>(),
+            It.IsAny<string>(), It.IsAny<bool>()), Times.Once);
 
         _apiServiceMock.VerifyNoOtherCalls();
     }
