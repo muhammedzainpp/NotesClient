@@ -1,4 +1,4 @@
-﻿using Notes.Web.Dtos.Notes.GetNotesQuery;
+﻿using Notes.Web.Models.NoteModels.GetNotesQuery;
 using Notes.Web.Services.Interfaces;
 using Notes.Web.ViewModel.NoteViewModels.Interfaces;
 

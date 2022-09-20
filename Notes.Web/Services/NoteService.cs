@@ -1,5 +1,5 @@
-﻿using Notes.Web.Dtos.Notes.GetNotesQuery;
-using Notes.Web.Dtos.Notes.SaveNoteCommand;
+﻿using Notes.Web.Models.NoteModels.GetNotesQuery;
+using Notes.Web.Models.NoteModels.SaveNoteCommand;
 using Notes.Web.Services.Interfaces;
 
 namespace Notes.Web.Services;

@@ -1,4 +1,4 @@
-﻿namespace Notes.Web.Dtos.UserProfile.GetUserProfileQuery;
+﻿namespace Notes.Web.Models.UserProfileModels.GetUserProfileQuery;
 
 public class GetUserProfileDto
 {

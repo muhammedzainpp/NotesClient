@@ -1,4 +1,4 @@
-﻿namespace Notes.Web.Dtos.Account.Logout;
+﻿namespace Notes.Web.Models.AccountModels.Logout;
 
 public class LogoutDto
 {

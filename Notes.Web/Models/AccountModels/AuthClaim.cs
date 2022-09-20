@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace Notes.Web.Dtos.Account;
+namespace Notes.Web.Models.AccountModels;
 
 public class AuthClaim : Claim
 {

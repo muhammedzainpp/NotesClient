@@ -1,4 +1,4 @@
-﻿namespace Notes.Web.Dtos.Account;
+﻿namespace Notes.Web.Models.AccountModels;
 
 public class AuthResponseDto
 {

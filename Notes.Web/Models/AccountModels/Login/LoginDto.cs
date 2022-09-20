@@ -1,4 +1,4 @@
-﻿namespace Notes.Web.Dtos.Account.Login;
+﻿namespace Notes.Web.Models.AccountModels.Login;
 
 public class LoginDto
 {

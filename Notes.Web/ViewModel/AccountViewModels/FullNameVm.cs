@@ -1,14 +1,14 @@
-﻿using Notes.Web.Models;
+﻿using Notes.Web.Models.Settings;
 using Notes.Web.ViewModel.AccountViewModels.Interfaces;
 
 namespace Notes.Web.ViewModel.AccountViewModels;
 
 public class FullNameVm : IFullNameVm
 {
-    private readonly ISettings _settings;
+    private readonly ISetting _settings;
     private string _firstName = default!;
 
-    public FullNameVm(ISettings settings) => _settings = settings;
+    public FullNameVm(ISetting settings) => _settings = settings;
 
     public Action? NotifyStateChanged { get; set; }
     public string FirstName

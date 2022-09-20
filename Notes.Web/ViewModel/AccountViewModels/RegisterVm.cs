@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using Notes.Web.Dtos.Account.Register;
+﻿using Notes.Web.Models.AccountModels.Register;
 using Notes.Web.Services;
 using Notes.Web.Services.Interfaces;
 using Notes.Web.ViewModel.AccountViewModels.Interfaces;

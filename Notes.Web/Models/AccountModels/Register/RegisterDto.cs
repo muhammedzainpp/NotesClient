@@ -1,4 +1,4 @@
-﻿namespace Notes.Web.Dtos.Account.Register;
+﻿namespace Notes.Web.Models.AccountModels.Register;
 
 public class RegisterDto
 {

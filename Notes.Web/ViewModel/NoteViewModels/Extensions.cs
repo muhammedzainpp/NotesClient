@@ -1,12 +1,12 @@
-﻿using Notes.Web.Dtos.Notes.SaveNoteCommand;
-using Notes.Web.Models;
+﻿using Notes.Web.Models.NoteModels.SaveNoteCommand;
+using Notes.Web.Models.Settings;
 using Notes.Web.ViewModel.NoteViewModels.Interfaces;
 
 namespace Notes.Web.ViewModel.NoteViewModels;
 
 public static class Extensions
 {
-    public static SaveNoteCommand MapTo(this ISaveNoteVm vm, ISettings settings) =>
+    public static SaveNoteCommand MapTo(this ISaveNoteVm vm, ISetting settings) =>
         new()
         {
             Id = vm.Id,

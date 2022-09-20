@@ -1,4 +1,4 @@
-﻿namespace Notes.Web.Dtos.Account.Refresh;
+﻿namespace Notes.Web.Models.AccountModels.Refresh;
 
 public class RefreshTokenDto
 {

@@ -1,6 +1,6 @@
-﻿namespace Notes.Web.Models
+﻿namespace Notes.Web.Models.Settings
 {
-    public interface ISettings
+    public interface ISetting
     {
         string FirstName { get; set; }
         int UserId { get; set; }

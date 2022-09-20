@@ -1,4 +1,4 @@
-﻿namespace Notes.Web.Dtos.UserProfile.SaveUserProfileCommand;
+﻿namespace Notes.Web.Models.UserProfileModels.SaveUserProfileCommand;
 
 public class SaveUserProfileCommand
 {

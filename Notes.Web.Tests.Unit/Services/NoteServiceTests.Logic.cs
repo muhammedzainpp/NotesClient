@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using Moq;
-using Notes.Web.Dtos.Notes.SaveNoteCommand;
+using Notes.Web.Models.NoteModels.SaveNoteCommand;
 
 namespace Notes.Web.Tests.Unit.Services;
 

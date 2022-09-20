@@ -1,12 +1,13 @@
-﻿using Notes.Web.Dtos.Account.Login;
-using Notes.Web.Dtos.Account.Refresh;
-using Notes.Web.Dtos.Account.Register;
-using Notes.Web.Dtos.Account;
-using Notes.Web.Models.Constants;
+﻿using Notes.Web.Models.Constants;
 using Notes.Web.Services.Interfaces;
 using Blazored.LocalStorage;
-using Notes.Web.Dtos.Account.Logout;
 using Notes.Web.Models;
+using Notes.Web.Models.AccountModels.Login;
+using Notes.Web.Models.AccountModels.Logout;
+using Notes.Web.Models.AccountModels.Refresh;
+using Notes.Web.Models.AccountModels.Register;
+using Notes.Web.Models.AccountModels;
+using Notes.Web.Models.Settings;
 
 namespace Notes.Web.Services;
 
@@ -14,10 +15,10 @@ public class IdentityService : IIdentityService
 {
     private readonly IAccountService _accountService;
     private readonly ILocalStorageService _localStorage;
-    private readonly ISettings _settings;
+    private readonly ISetting _settings;
 
     public IdentityService(IAccountService accountService, ILocalStorageService localStorage, 
-        ISettings settings)
+        ISetting settings)
     {
         _accountService = accountService;
         _localStorage = localStorage;

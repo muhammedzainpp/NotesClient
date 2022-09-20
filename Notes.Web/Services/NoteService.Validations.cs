@@ -1,5 +1,5 @@
-﻿using Notes.Web.Dtos.Notes.SaveNoteCommand;
-using Notes.Web.Exceptions.NoteExceptions;
+﻿using Notes.Web.Exceptions.NoteExceptions;
+using Notes.Web.Models.NoteModels.SaveNoteCommand;
 
 namespace Notes.Web.Services;
 

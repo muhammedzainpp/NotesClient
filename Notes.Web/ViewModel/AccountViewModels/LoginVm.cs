@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
-using Notes.Web.Dtos.Account.Login;
+using Notes.Web.Models.AccountModels.Login;
 using Notes.Web.Services;
 using Notes.Web.Services.Interfaces;
 using Notes.Web.ViewModel.AccountViewModels.Interfaces;

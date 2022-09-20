@@ -1,5 +1,5 @@
-﻿using Notes.Web.Dtos.UserProfile.GetUserProfileQuery;
-using Notes.Web.Dtos.UserProfile.SaveUserProfileCommand;
+﻿using Notes.Web.Models.UserProfileModels.GetUserProfileQuery;
+using Notes.Web.Models.UserProfileModels.SaveUserProfileCommand;
 using Notes.Web.Services.Interfaces;
 
 namespace Notes.Web.Services;

@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Notes.Web;
-using Notes.Web.Models;
 using Notes.Web.Models.Configurations;
+using Notes.Web.Models.Settings;
 using Notes.Web.Services;
 using Notes.Web.Services.Interfaces;
 using Notes.Web.ViewModel.AccountViewModels;
@@ -23,7 +23,7 @@ var services = builder.Services;
 AddHttp(builder);
 
 AddServices(services);
-services.AddSingleton<ISettings, Settings>();
+services.AddSingleton<ISetting, Setting>();
 
 services.AddBlazoredLocalStorage();
 services.AddAuthorizationCore();

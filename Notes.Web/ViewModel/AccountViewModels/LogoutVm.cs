@@ -1,20 +1,20 @@
-﻿using Notes.Web.Dtos.Account.Logout;
-using Notes.Web.Services.Interfaces;
+﻿using Notes.Web.Services.Interfaces;
 using Notes.Web.ViewModel.AccountViewModels.Interfaces;
-using Notes.Web.Models;
 using Notes.Web.Services;
 using Microsoft.AspNetCore.Components.Authorization;
+using Notes.Web.Models.Settings;
+using Notes.Web.Models.AccountModels.Logout;
 
 namespace Notes.Web.ViewModel.AccountViewModels;
 
 public class LogoutVm : ILogoutVm
 {
     private readonly IIdentityService _identityService;
-    private readonly ISettings _settings;
+    private readonly ISetting _settings;
     private readonly CustomStateProvider _authState;
 
     public LogoutVm(IIdentityService identityService, 
-        ISettings settings, AuthenticationStateProvider authState)
+        ISetting settings, AuthenticationStateProvider authState)
     {
         _identityService = identityService;
         _settings = settings;

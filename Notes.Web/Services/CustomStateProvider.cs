@@ -3,8 +3,8 @@ using Notes.Web.Services.Interfaces;
 using System.Security.Claims;
 using Blazored.LocalStorage;
 using Notes.Web.Models.Constants;
-using Notes.Web.Dtos.Account.Refresh;
-using Notes.Web.Dtos.Account;
+using Notes.Web.Models.AccountModels;
+using Notes.Web.Models.AccountModels.Refresh;
 
 namespace Notes.Web.Services;
 

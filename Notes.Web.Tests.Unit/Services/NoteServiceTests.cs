@@ -1,5 +1,5 @@
 ﻿using Moq;
-using Notes.Web.Dtos.Notes.SaveNoteCommand;
+using Notes.Web.Models.NoteModels.SaveNoteCommand;
 using Notes.Web.Services;
 using Notes.Web.Services.Interfaces;
 using Notes.Web.ViewModel.ButtonWithSpinnerViewModel;

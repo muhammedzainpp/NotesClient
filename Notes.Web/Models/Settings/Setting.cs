@@ -1,6 +1,6 @@
-﻿namespace Notes.Web.Models;
+﻿namespace Notes.Web.Models.Settings;
 
-public class Settings : ISettings
+public class Setting : ISetting
 {
     public int UserId { get; set; }
     public string FirstName { get; set; } = default!;
