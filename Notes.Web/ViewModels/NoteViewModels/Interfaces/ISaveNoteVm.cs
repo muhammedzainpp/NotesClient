@@ -1,6 +1,6 @@
-﻿using Notes.Web.ViewModel.ButtonWithSpinnerViewModel;
+﻿using Notes.Web.ViewModels.ButtonWithSpinnerViewModels;
 
-namespace Notes.Web.ViewModel.NoteViewModels.Interfaces;
+namespace Notes.Web.ViewModels.NoteViewModels.Interfaces;
 
 public interface ISaveNoteVm
 {

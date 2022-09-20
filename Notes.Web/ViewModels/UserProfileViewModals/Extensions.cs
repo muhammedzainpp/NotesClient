@@ -1,9 +1,7 @@
 ﻿using Notes.Web.Models.UserProfileModels.GetUserProfileQuery;
 using Notes.Web.Models.UserProfileModels.SaveUserProfileCommand;
-using System.Numerics;
-using System.Runtime.CompilerServices;
 
-namespace Notes.Web.ViewModel.UserProfileViewModals;
+namespace Notes.Web.ViewModels.UserProfileViewModals;
 
 public static class Extensions
 {

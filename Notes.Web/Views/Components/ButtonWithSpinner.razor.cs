@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Notes.Web.ViewModel.ButtonWithSpinnerViewModel;
+using Notes.Web.ViewModels.ButtonWithSpinnerViewModels;
 
 namespace Notes.Web.Views.Components;
 

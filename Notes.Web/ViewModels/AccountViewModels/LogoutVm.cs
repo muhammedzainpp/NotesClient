@@ -1,11 +1,11 @@
 ﻿using Notes.Web.Services.Interfaces;
-using Notes.Web.ViewModel.AccountViewModels.Interfaces;
 using Notes.Web.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Notes.Web.Models.Settings;
 using Notes.Web.Models.AccountModels.Logout;
+using Notes.Web.ViewModels.AccountViewModels.Interfaces;
 
-namespace Notes.Web.ViewModel.AccountViewModels;
+namespace Notes.Web.ViewModels.AccountViewModels;
 
 public class LogoutVm : ILogoutVm
 {
@@ -13,7 +13,7 @@ public class LogoutVm : ILogoutVm
     private readonly ISetting _settings;
     private readonly CustomStateProvider _authState;
 
-    public LogoutVm(IIdentityService identityService, 
+    public LogoutVm(IIdentityService identityService,
         ISetting settings, AuthenticationStateProvider authState)
     {
         _identityService = identityService;
@@ -28,7 +28,7 @@ public class LogoutVm : ILogoutVm
             UserId = _settings.UserId,
         };
 
-       await _identityService.LogoutAsync(request);
+        await _identityService.LogoutAsync(request);
 
         _authState.NotifyAuthStateChanged(null);
     }

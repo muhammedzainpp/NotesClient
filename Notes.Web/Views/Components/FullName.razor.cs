@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Notes.Web.ViewModel.AccountViewModels.Interfaces;
+using Notes.Web.ViewModels.AccountViewModels.Interfaces;
 
 namespace Notes.Web.Views.Components;
 

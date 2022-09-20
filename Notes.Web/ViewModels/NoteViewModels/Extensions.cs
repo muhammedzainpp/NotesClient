@@ -1,8 +1,8 @@
 ﻿using Notes.Web.Models.NoteModels.SaveNoteCommand;
 using Notes.Web.Models.Settings;
-using Notes.Web.ViewModel.NoteViewModels.Interfaces;
+using Notes.Web.ViewModels.NoteViewModels.Interfaces;
 
-namespace Notes.Web.ViewModel.NoteViewModels;
+namespace Notes.Web.ViewModels.NoteViewModels;
 
 public static class Extensions
 {

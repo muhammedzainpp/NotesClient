@@ -1,17 +1,17 @@
 ﻿using Notes.Web.Models.Settings;
 using Notes.Web.Services.Interfaces;
-using Notes.Web.ViewModel.ButtonWithSpinnerViewModel;
-using Notes.Web.ViewModel.NoteViewModels.Interfaces;
+using Notes.Web.ViewModels.ButtonWithSpinnerViewModels;
+using Notes.Web.ViewModels.NoteViewModels.Interfaces;
 
-namespace Notes.Web.ViewModel.NoteViewModels;
+namespace Notes.Web.ViewModels.NoteViewModels;
 
 public partial class SaveNoteVm : ISaveNoteVm
 {
     private readonly ISetting _settings;
     private readonly INoteService _service;
 
-    public SaveNoteVm(ISetting settings, 
-        IButtonWithSpinnerVm spinnerVm, 
+    public SaveNoteVm(ISetting settings,
+        IButtonWithSpinnerVm spinnerVm,
         INoteService noteService)
     {
         _settings = settings;

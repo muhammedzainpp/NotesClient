@@ -2,7 +2,7 @@
 using Notes.Web.Models.NoteModels.SaveNoteCommand;
 using Notes.Web.Services;
 using Notes.Web.Services.Interfaces;
-using Notes.Web.ViewModel.ButtonWithSpinnerViewModel;
+using Notes.Web.ViewModels.ButtonWithSpinnerViewModels;
 using Tynamix.ObjectFiller;
 
 namespace Notes.Web.Tests.Unit.Services;

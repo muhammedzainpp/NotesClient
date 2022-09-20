@@ -1,9 +1,9 @@
 ﻿using Notes.Web.Models.Settings;
 using Notes.Web.Services.Interfaces;
-using Notes.Web.ViewModel.AccountViewModels.Interfaces;
-using Notes.Web.ViewModel.UserProfileViewModals.InterFaces;
+using Notes.Web.ViewModels.AccountViewModels.Interfaces;
+using Notes.Web.ViewModels.UserProfileViewModals.InterFaces;
 
-namespace Notes.Web.ViewModel.UserProfileViewModals;
+namespace Notes.Web.ViewModels.UserProfileViewModals;
 
 public class UserProfileVm : IUserProfileVm
 {
@@ -11,7 +11,7 @@ public class UserProfileVm : IUserProfileVm
     private readonly IFullNameVm _fullNameVm;
     private readonly IUserProfileService _service;
 
-    public UserProfileVm(ISetting settings, 
+    public UserProfileVm(ISetting settings,
         IFullNameVm fullNameVm,
         IUserProfileService service)
     {

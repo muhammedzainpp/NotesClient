@@ -1,8 +1,8 @@
 ﻿using Notes.Web.Models.NoteModels.GetNotesQuery;
 using Notes.Web.Services.Interfaces;
-using Notes.Web.ViewModel.NoteViewModels.Interfaces;
+using Notes.Web.ViewModels.NoteViewModels.Interfaces;
 
-namespace Notes.Web.ViewModel.NoteViewModels;
+namespace Notes.Web.ViewModels.NoteViewModels;
 
 public class ListNoteVm : IListNoteVm
 {
@@ -11,6 +11,6 @@ public class ListNoteVm : IListNoteVm
 
     public IEnumerable<GetNotesDto>? Notes { get; set; }
 
-    public async Task GetNotesAsync() => 
+    public async Task GetNotesAsync() =>
         Notes = await _service.GetNotesAsync();
 }

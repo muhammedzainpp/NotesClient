@@ -2,9 +2,9 @@
 using Notes.Web.Models.AccountModels.Login;
 using Notes.Web.Services;
 using Notes.Web.Services.Interfaces;
-using Notes.Web.ViewModel.AccountViewModels.Interfaces;
+using Notes.Web.ViewModels.AccountViewModels.Interfaces;
 
-namespace Notes.Web.ViewModel.AccountViewModels;
+namespace Notes.Web.ViewModels.AccountViewModels;
 
 public class LoginVm : ILoginVm
 {

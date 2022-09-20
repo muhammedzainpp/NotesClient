@@ -1,9 +1,9 @@
-﻿namespace Notes.Web.ViewModel.UserProfileViewModals.InterFaces;
+﻿namespace Notes.Web.ViewModels.UserProfileViewModals.InterFaces;
 
 public interface IUserProfileVm
 {
     string? About { get; set; }
-   
+
     string? Email { get; set; }
     string? FacebookUrl { get; set; }
     string FirstName { get; set; }

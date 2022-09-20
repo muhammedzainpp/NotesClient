@@ -1,6 +1,6 @@
 ﻿using Notes.Web.Models.NoteModels.GetNotesQuery;
 
-namespace Notes.Web.ViewModel.NoteViewModels.Interfaces;
+namespace Notes.Web.ViewModels.NoteViewModels.Interfaces;
 
 public interface IListNoteVm
 {

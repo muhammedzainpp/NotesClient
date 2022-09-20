@@ -1,4 +1,4 @@
-﻿namespace Notes.Web.ViewModel.AccountViewModels.Interfaces;
+﻿namespace Notes.Web.ViewModels.AccountViewModels.Interfaces;
 
 public interface IRegisterVm
 {

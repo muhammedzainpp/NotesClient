@@ -1,4 +1,4 @@
-﻿namespace Notes.Web.ViewModel.ButtonWithSpinnerViewModel;
+﻿namespace Notes.Web.ViewModels.ButtonWithSpinnerViewModels;
 
 public interface IButtonWithSpinnerVm
 {

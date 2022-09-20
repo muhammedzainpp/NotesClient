@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Notes.Web.ViewModel.NoteViewModels.Interfaces;
+using Notes.Web.ViewModels.NoteViewModels.Interfaces;
 
 namespace Notes.Web.Views.NoteViews;
 

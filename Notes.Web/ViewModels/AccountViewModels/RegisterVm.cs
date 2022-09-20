@@ -1,9 +1,9 @@
 ﻿using Notes.Web.Models.AccountModels.Register;
 using Notes.Web.Services;
 using Notes.Web.Services.Interfaces;
-using Notes.Web.ViewModel.AccountViewModels.Interfaces;
+using Notes.Web.ViewModels.AccountViewModels.Interfaces;
 
-namespace Notes.Web.ViewModel.AccountViewModels;
+namespace Notes.Web.ViewModels.AccountViewModels;
 
 public class RegisterVm : IRegisterVm
 {

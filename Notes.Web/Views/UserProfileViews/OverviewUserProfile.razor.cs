@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Notes.Web.ViewModel.UserProfileViewModals.InterFaces;
+using Notes.Web.ViewModels.UserProfileViewModals.InterFaces;
 
 namespace Notes.Web.Views.UserProfileViews;
 
