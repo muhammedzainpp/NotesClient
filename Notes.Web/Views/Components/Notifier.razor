@@ -1,0 +1,10 @@
+﻿
+<If IsTrue="Vm.IsVisible">
+</If>
+    <div class="me-0 ms-auto w-25" style="visibility:@(Vm.IsVisible ? "visible" : "")">
+        <div class="alert @Vm.GetColorCss() alert-dismissible fade @Vm.ShowCss" role="alert">
+            <i class="@Vm.GetIconCss() me-1"></i>
+            @Vm.Message
+            <button type="button" class="btn-close @Vm.GetButtonCss()" @onclick="Vm.Close" aria-label="Close"></button>
+        </div>
+    </div>

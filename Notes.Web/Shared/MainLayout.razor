@@ -2,12 +2,13 @@
 
 <AuthorizeView>
     <NotAuthorized>
-        <LoginView/>
+        <LoginView />
     </NotAuthorized>
     <Authorized>
         <Header />
         <Sidebar />
         <main id="main" class="main">
+            <Notifier />
             @Body
         </main>
     </Authorized>
