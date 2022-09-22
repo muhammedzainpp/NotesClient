@@ -1,1 +1,38 @@
-﻿
+﻿@inherits TestContext
+
+@code {
+    [Fact]
+    public void ShouldRenderAccordingToTheBindings()
+    {
+        var mockVm = new Mock<INotifierViewModel>();
+
+        var showCss = "show";
+        var colorCss = "testColor";
+        var iconCss = "iconCss";
+        var message = "Success";
+        var buttonCss = "testcolor";
+
+        mockVm.SetupGet(vm => vm.ShowCss).Returns(showCss);
+        mockVm.SetupGet(vm => vm.Message).Returns(message);
+        mockVm.Setup(vm => vm.GetButtonCss()).Returns(buttonCss);
+        mockVm.Setup(vm => vm.GetIconCss()).Returns(iconCss);
+        mockVm.Setup(vm => vm.GetColorCss()).Returns(colorCss);
+        Services.AddSingleton<INotifierViewModel>(mockVm.Object);
+        var cut = RenderComponent<NotifierView>();
+
+        cut.MarkupMatches(
+    @<div aria-live="polite" aria-atomic="true" class="position-relative">
+        <div class="toast-container position-absolute top-0 end-0 p-3">
+            <div class="toast @colorCss fade @showCss" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <i class="@iconCss me-1"></i>
+                        @message
+                    </div>
+                    <button type="button" class="btn-close me-2 m-auto p-1 fs-2 @buttonCss" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    </div>);
+    }
+}
