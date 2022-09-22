@@ -18,9 +18,12 @@ public class ModalVm : IModalVm
     public Func<Task<bool>>? OnConfirm { get; set; }
 
     public async Task InitJsModuleAsync() => 
-        _jsModule = await _jSRuntime.InvokeAsync<IJSObjectReference>("import", "./Scripts/modal.js");
+        _jsModule = await _jSRuntime.InvokeAsync<IJSObjectReference>("import", "./scripts/modal.js");
 
-    public async Task OpenAsync(string header, RenderFragment body, string confirmButtonText, string cancelButtonText)
+    public async Task OpenAsync(string header, 
+        RenderFragment body, 
+        string confirmButtonText,
+        string cancelButtonText)
     {
         Header = header;
         Body = body;
@@ -36,6 +39,7 @@ public class ModalVm : IModalVm
         OnCancel?.Invoke();
 
         await CloseModal();
+
     }
 
     public async Task ConfirmAsync()

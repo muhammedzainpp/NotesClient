@@ -17,7 +17,7 @@
     <None Include="Shared\Header.razor" />
     <None Include="Views\Components\ModalComponents\Modal.razor" />
     <None Include="Views\UserProfileViews\EditUserProfileView.razor" />
-    <None Include="wwwroot\Scripts\modal.js" />
+    <None Include="wwwroot\scripts\modal.js" />
   </ItemGroup>
 
 </Project>
