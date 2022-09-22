@@ -3,7 +3,7 @@ using Notes.Web.ViewModels.NotifierViewModels;
 
 namespace Notes.Web.Views.Components;
 
-public partial class Notifier : ComponentBase, IDisposable
+public partial class NotifierView : ComponentBase, IDisposable
 {
     [Inject]
     public INotifierViewModel Vm { get; set; } = default!;
