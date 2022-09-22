@@ -1,0 +1,33 @@
+﻿<div class="modal fade" id="myModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@Vm.Header</h5>
+                <button type="button" class="btn-close" @onclick="Vm.CloseAsync" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">@Vm.Body</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" @onclick="Vm.CloseAsync">@Vm.CancelButtonText</button>
+                <button type="button" class="btn btn-primary" @onclick="Vm.ConfirmAsync">@Vm.ConfirmButtonText</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*test*@
+<button type="button" class="btn btn-primary" @onclick="OpenModal">
+    Open Modal
+</button>
+
+
+@code {
+
+    private static RenderFragment GetBody = __builder =>
+    {
+        <SaveNoteView />
+    };
+    public async Task OpenModal()
+    {
+        Vm.OpenAsync("Test Modal", GetBody, "Ok", "Cancel");
+    }
+}

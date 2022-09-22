@@ -18,7 +18,7 @@
         mockVm.Setup(vm => vm.GetIconCss()).Returns(iconCss);
         mockVm.Setup(vm => vm.GetColorCss()).Returns(colorCss);
         Services.AddSingleton<INotifierViewModel>(mockVm.Object);
-        var cut = RenderComponent<NotifierView>();
+        var cut = RenderComponent<Notifier>();
 
         cut.MarkupMatches(
     @<div aria-live="polite" aria-atomic="true" class="position-relative">
