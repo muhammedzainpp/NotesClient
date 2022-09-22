@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace Notes.Web.Views.Components
+namespace Notes.Web.Views.Components.HelperComponents
 {
     public partial class ListItems<TItem>
     {

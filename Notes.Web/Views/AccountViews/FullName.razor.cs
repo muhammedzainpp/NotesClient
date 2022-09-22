@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Notes.Web.ViewModels.AccountViewModels.Interfaces;
 
-namespace Notes.Web.Views.Components;
+namespace Notes.Web.Views.AccountViews;
 
 public partial class FullName : IDisposable
 {
@@ -11,4 +11,4 @@ public partial class FullName : IDisposable
     protected override void OnInitialized() => Vm.NotifyStateChanged += StateHasChanged;
     void IDisposable.Dispose() => Vm.NotifyStateChanged -= StateHasChanged;
 }
-    
+
