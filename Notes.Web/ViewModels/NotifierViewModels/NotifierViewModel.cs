@@ -1,4 +1,5 @@
 ﻿using Notes.Web.Models.Enums;
+using Notes.Web.ViewModels.NotifierViewModels.Interfaces;
 
 namespace Notes.Web.ViewModels.NotifierViewModels;
 

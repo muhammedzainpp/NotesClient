@@ -1,6 +1,6 @@
 ﻿using Notes.Web.Models.Enums;
 
-namespace Notes.Web.ViewModels.NotifierViewModels
+namespace Notes.Web.ViewModels.NotifierViewModels.Interfaces
 {
     public interface INotifierViewModel
     {

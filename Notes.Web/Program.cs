@@ -13,6 +13,7 @@ using Notes.Web.ViewModels.ButtonWithSpinnerViewModels;
 using Notes.Web.ViewModels.NoteViewModels;
 using Notes.Web.ViewModels.NoteViewModels.Interfaces;
 using Notes.Web.ViewModels.NotifierViewModels;
+using Notes.Web.ViewModels.NotifierViewModels.Interfaces;
 using Notes.Web.ViewModels.UserProfileViewModals;
 using Notes.Web.ViewModels.UserProfileViewModals.InterFaces;
 

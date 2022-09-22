@@ -4,7 +4,7 @@ using Notes.Web.Models.Settings;
 using Notes.Web.Services.Interfaces;
 using Notes.Web.ViewModels.ButtonWithSpinnerViewModels;
 using Notes.Web.ViewModels.NoteViewModels.Interfaces;
-using Notes.Web.ViewModels.NotifierViewModels;
+using Notes.Web.ViewModels.NotifierViewModels.Interfaces;
 
 namespace Notes.Web.ViewModels.NoteViewModels;
 
