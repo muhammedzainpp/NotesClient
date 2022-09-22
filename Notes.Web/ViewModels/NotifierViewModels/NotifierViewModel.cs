@@ -7,17 +7,16 @@ public class NotifierViewModel : INotifierViewModel
     private const string _show = "show";
     private NotifierType Type { get; set; }
     public string? ShowCss { get; private set; }
-    public bool IsVisible => ShowCss == _show;
     public string? Message { get; private set; }
     public Action? NotifyStateChanged { get; set; }
 
     public string GetColorCss() =>
         Type switch
         {
-            NotifierType.Success => "alert-success bg-success text-light",
-            NotifierType.Error => "alert-danger bg-danger text-light",
-            NotifierType.Warning => "alert-warning bg-warning",
-            _ => "alert-success bg-success text-light"
+            NotifierType.Success => "bg-success text-light",
+            NotifierType.Error => "bg-danger text-light",
+            NotifierType.Warning => "bg-warning",
+            _ => "bg-success text-light"
         };
 
     public string GetIconCss() =>

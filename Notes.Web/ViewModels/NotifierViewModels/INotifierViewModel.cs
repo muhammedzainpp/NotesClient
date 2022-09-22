@@ -7,8 +7,6 @@ namespace Notes.Web.ViewModels.NotifierViewModels
         string? ShowCss { get; }
         string? Message { get; }
         Action? NotifyStateChanged { get; set; }
-        bool IsVisible { get; }
-
         void Close();
         string GetButtonCss();
         string GetColorCss();
