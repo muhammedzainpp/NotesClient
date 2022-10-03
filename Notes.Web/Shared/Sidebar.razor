@@ -1,9 +1,15 @@
 ﻿<aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
-
-
-
+        <ListItems Items="Items" Context="item">
+            <ItemTemplate>
+                <li class="nav-item">
+                    <a class="nav-link @(item.IsActive ? "acive" : "collapsed")" href="@item.Url">
+                        <i class="@item.IconClassName"></i>
+                        <span>@item.Name</span>
+                    </a>
+                </li>
+            </ItemTemplate>
+        </ListItems>
     </ul>
-
 </aside>
