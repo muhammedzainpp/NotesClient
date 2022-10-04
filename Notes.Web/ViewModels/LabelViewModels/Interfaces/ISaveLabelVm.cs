@@ -1,4 +1,6 @@
-﻿namespace Notes.Web.ViewModels.LabelViewModels.Interfaces;
+﻿using Notes.Web.ViewModels.ButtonWithSpinnerViewModels;
+
+namespace Notes.Web.ViewModels.LabelViewModels.Interfaces;
 
 public interface ISaveLabelVm
 {
@@ -6,6 +8,7 @@ public interface ISaveLabelVm
     int Id { get; set; }
     string Title { get; set; }
     int UserId { get; set; }
+    IButtonWithSpinnerVm SpinnerVm { get; set; }
 
     Task SaveAsync();
 }

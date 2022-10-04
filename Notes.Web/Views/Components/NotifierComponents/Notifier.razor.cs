@@ -8,7 +8,6 @@ public partial class Notifier : ComponentBase, IDisposable
     [Inject]
     public INotifierVm Vm { get; set; } = default!;
 
-
     protected override void OnInitialized() =>
         Vm.NotifyStateChanged += StateHasChanged;
 
