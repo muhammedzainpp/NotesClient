@@ -1,36 +1,16 @@
-﻿
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Saved Notes</h5>
-        <div class="list-group">
-            <ListItems Items="Vm.Notes" Context="note">
-                <ItemTemplate>
-                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">@note.Title</h5>
-                            <small>3 days ago</small>
-                        </div>
-                        <p class="mb-1">@note.Description</p>
-                        <small>And some small print.</small>
-                    </a>
-                </ItemTemplate>
-            </ListItems>
-
-
-            @*@if (Vm.Notes is not null)
-            {
-            foreach (var note in Vm.Notes)
-            {
-            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-            <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">@note.Title</h5>
-            <small>3 days ago</small>
+﻿<div class="row row-cols-1 row-cols-md-3 g-1">
+    <ListItems Items="Vm.Notes" Context="note">
+        <ItemTemplate>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@note.Title</h5>
+                        <p class="card-text">
+                            @note.Description
+                        </p>
+                    </div>
+                </div>
             </div>
-            <p class="mb-1">@note.Description</p>
-            <small>And some small print.</small>
-            </a>
-            }
-            }*@
-        </div>
-    </div>
+        </ItemTemplate>
+    </ListItems>
 </div>
