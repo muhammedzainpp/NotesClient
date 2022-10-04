@@ -3,7 +3,7 @@ using Notes.Web.ViewModels.NotifierViewModels.Interfaces;
 
 namespace Notes.Web.ViewModels.NotifierViewModels;
 
-public class NotifierViewModel : INotifierViewModel
+public class NotifierVm : INotifierVm
 {
     private const string _show = "show";
     private NotifierType Type { get; set; }

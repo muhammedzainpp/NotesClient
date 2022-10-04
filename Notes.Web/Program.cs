@@ -11,6 +11,8 @@ using Notes.Web.Services.Interfaces;
 using Notes.Web.ViewModels.AccountViewModels;
 using Notes.Web.ViewModels.AccountViewModels.Interfaces;
 using Notes.Web.ViewModels.ButtonWithSpinnerViewModels;
+using Notes.Web.ViewModels.LabelViewModels;
+using Notes.Web.ViewModels.LabelViewModels.Interfaces;
 using Notes.Web.ViewModels.ModalViewModals;
 using Notes.Web.ViewModels.NoteViewModels;
 using Notes.Web.ViewModels.NoteViewModels.Interfaces;
@@ -52,9 +54,11 @@ static void AddViewModels(IServiceCollection services)
     services.AddTransient<ILoginVm, LoginVm>();
     services.AddTransient<ILogoutVm, LogoutVm>();
     services.AddTransient<IUserProfileVm, UserProfileVm>();
+    services.AddTransient<ISaveLabelVm, SaveLabelVm>();
+
     services.AddScoped<IFullNameVm, FullNameVm>();
     services.AddTransient<IButtonWithSpinnerVm, ButtonWithSpinnerVm>();
-    services.AddSingleton<INotifierViewModel, NotifierViewModel>();
+    services.AddSingleton<INotifierVm, NotifierVm>();
     services.AddSingleton<IModalVm, ModalVm>();
 }
 
@@ -68,6 +72,7 @@ static void AddServices(IServiceCollection services)
     services.AddScoped<IAccountService, AccountService>();
     services.AddScoped<INoteService, NoteService>();
     services.AddScoped<IUserProfileService, UserProfileService>();
+    services.AddScoped<ILabelService, LabelService>();
 
 
 }

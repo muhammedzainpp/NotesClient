@@ -2,7 +2,7 @@
 
 namespace Notes.Web.ViewModels.NotifierViewModels.Interfaces
 {
-    public interface INotifierViewModel
+    public interface INotifierVm
     {
         string? ShowCss { get; }
         string? Message { get; }

@@ -6,7 +6,7 @@ namespace Notes.Web.Views.Components.NotifierComponents;
 public partial class Notifier : ComponentBase, IDisposable
 {
     [Inject]
-    public INotifierViewModel Vm { get; set; } = default!;
+    public INotifierVm Vm { get; set; } = default!;
 
 
     protected override void OnInitialized() =>

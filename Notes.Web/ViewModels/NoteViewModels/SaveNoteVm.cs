@@ -12,12 +12,12 @@ public partial class SaveNoteVm : ISaveNoteVm
 {
     private readonly ISetting _settings;
     private readonly INoteService _service;
-    private readonly INotifierViewModel _notifier;
+    private readonly INotifierVm _notifier;
 
     public SaveNoteVm(ISetting settings,
         IButtonWithSpinnerVm spinnerVm,
         INoteService noteService,
-        INotifierViewModel notifier)
+        INotifierVm notifier)
     {
         _settings = settings;
         SpinnerVm = spinnerVm;

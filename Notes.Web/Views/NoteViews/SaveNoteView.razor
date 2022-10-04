@@ -1,12 +1,12 @@
 ﻿<div class="mx-3">
-    <EditForm Model="@Vm" OnValidSubmit="@Vm.SaveNoteAsync">
+    <EditForm Model="Vm" OnValidSubmit="Vm.SaveNoteAsync">
         <div class="mb-2">
             <label for="title">Title:</label>
-            <InputText id="title" @bind-Value="Vm.Title" class="w-100" />
+            <InputText id="title" @bind-Value="Vm.Title" />
         </div>
         <div>
             <label for="description">Description:</label>
-            <InputTextArea id="description" @bind-Value="Vm.Description" class="w-100" />
+            <InputTextArea id="description" @bind-Value="Vm.Description" />
         </div>
         <div class="d-flex flex-row-reverse mt-2 mb-3">
             <ButtonWithSpinner Vm="Vm.SpinnerVm">

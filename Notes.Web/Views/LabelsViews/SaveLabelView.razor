@@ -1,0 +1,8 @@
+﻿<EditForm Model="Vm" OnInvalidSubmit="Vm.SaveAsync">
+    <div class="mb-2">
+        <InputText id="title" @bind-Value="Vm.Title" />
+    </div>
+    <ButtonWithSpinner Vm="Vm.SpinnerVm">
+                <button class="btn btn-primary" type="submit">Save Label</button>
+            </ButtonWithSpinner
+</EditForm>

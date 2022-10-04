@@ -2,6 +2,6 @@
 {
     public interface INotifierContainerVm
     {
-        List<INotifierViewModel>? NotifierViewModels { get; set; }
+        List<INotifierVm>? NotifierViewModels { get; set; }
     }
 }

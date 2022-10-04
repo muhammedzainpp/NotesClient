@@ -4,7 +4,7 @@
     [Fact]
     public void ShouldRenderAccordingToTheBindings()
     {
-        var mockVm = new Mock<INotifierViewModel>();
+        var mockVm = new Mock<INotifierVm>();
 
         var showCss = "show";
         var colorCss = "testColor";
@@ -17,7 +17,7 @@
         mockVm.Setup(vm => vm.GetButtonCss()).Returns(buttonCss);
         mockVm.Setup(vm => vm.GetIconCss()).Returns(iconCss);
         mockVm.Setup(vm => vm.GetColorCss()).Returns(colorCss);
-        Services.AddSingleton<INotifierViewModel>(mockVm.Object);
+        Services.AddSingleton<INotifierVm>(mockVm.Object);
         var cut = RenderComponent<Notifier>();
 
         cut.MarkupMatches(
