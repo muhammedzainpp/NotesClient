@@ -1,4 +1,5 @@
 using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -67,4 +68,6 @@ static void AddServices(IServiceCollection services)
     services.AddScoped<IAccountService, AccountService>();
     services.AddScoped<INoteService, NoteService>();
     services.AddScoped<IUserProfileService, UserProfileService>();
+
+
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 
-namespace Notes.Web.Shared;
+namespace Notes.Web.Views.Components.SidebarComponents;
 
 public partial class Sidebar
 {
