@@ -18,6 +18,7 @@ using Notes.Web.ViewModels.NoteViewModels;
 using Notes.Web.ViewModels.NoteViewModels.Interfaces;
 using Notes.Web.ViewModels.NotifierViewModels;
 using Notes.Web.ViewModels.NotifierViewModels.Interfaces;
+using Notes.Web.ViewModels.SidebarViewModels;
 using Notes.Web.ViewModels.UserProfileViewModals;
 using Notes.Web.ViewModels.UserProfileViewModals.InterFaces;
 
@@ -55,7 +56,8 @@ static void AddViewModels(IServiceCollection services)
     services.AddTransient<ILogoutVm, LogoutVm>();
     services.AddTransient<IUserProfileVm, UserProfileVm>();
     services.AddTransient<ISaveLabelVm, SaveLabelVm>();
-
+    
+    services.AddScoped<ISidebarVm, SidebarVm>();
     services.AddScoped<IFullNameVm, FullNameVm>();
     services.AddTransient<IButtonWithSpinnerVm, ButtonWithSpinnerVm>();
     services.AddSingleton<INotifierVm, NotifierVm>();
